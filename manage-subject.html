@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Dashboard</title>
+    <link rel="stylesheet" href="manage-subject.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TutorLinc logo">
+                <h1 class="site-name">TutorLinc</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="" class="active">Manage Subjects</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <div class="menu-toggle-container">
+                <button class="menu-toggle">☰</button> <!-- Hamburger Menu -->
+                <hr>
+            </div>
+
+            <header class="main-header">
+                <h1>Manage Subjects</h1>
+            </header>
+
+            <section class="subjects-section">
+                <table class="subjects-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mathematics</td>
+                            <td>Basic and advanced topics in math.</td>
+                            <td>
+                                <button class="btn" id="btn-edit">Edit</button>
+                                <button class="btn" id="btn-delete">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Physics</td>
+                            <td>Fundamentals of physics with practicals.</td>
+                            <td>
+                                <button class="btn" id="btn-edit">Edit</button>
+                                <button class="btn" id="btn-delete">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <a href="add-subject.html" style="text-decoration: none;"><button class="add-subject-btn">Add New Subject</button></a>
+        </main>
+    </div>
+
+    <script src="manage-subject.js"></script>
+</body>
+</html>

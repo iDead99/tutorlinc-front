@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Tutor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TutorLinc logo">
+                <h1 class="site-name">TutorLinc</h1>
+            </div>
+            <button class="menu-toggle">☰</button> <!-- Hamburger Menu -->
+            <nav class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#">Home 🏠</a></li>
+                    <li><a href="#">How It Works ❓</a></li>
+                    <li><a href="#">Find a Teacher 🔎</a></li>
+                    <li><a href="#">Become a Tutor 📚</a></li>
+                    <li><a href="#">Contact Us 📞</a></li>
+                    <li><a href="signin.html" class="login-btn">Sign Up / Log In</a></li>                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="tutoring-banner">
+            <img src="images/tutoring.jpg" alt="">
+        </div>
+        <div class="hero-content">
+            <h2>Find the Perfect Private Tutor Near You</h2>
+            <p>Connect with qualified tutors in your area for personalized learning</p>
+            <form class="search-bar">
+                <!-- <input type="text" placeholder="What do you want to learn?"> -->
+                <input id="search-input" type="text" placeholder="Enter your location">
+                <button type="submit">Search</button>
+            </form>
+            <div class="cta-buttons">
+                <a href="#secondary-btn" class="primary-btn"><label for="search-input">Find a Teacher</label></a>
+                <a href="signup.html" class="secondary-btn" >Become a Tutor</a>
+            </div>
+        </div>
+    </section>
+    <!-- <section class="teacher-section">
+        <div class="teacher-container"></div>
+    </section> -->
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h3>Why Choose Us?</h3>
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="icon">📚</i>
+                    <h4>Personalized Learning</h4>
+                    <p>Find a tutor who tailors lessons to your needs.</p>
+                </div>
+                <div class="feature">
+                    <i class="icon">✅</i>
+                    <h4>Verified Tutors</h4>
+                    <p>All tutors are vetted and reviewed by students.</p>
+                </div>
+                <div class="feature">
+                    <i class="icon">📅</i>
+                    <h4>Flexible Scheduling</h4>
+                    <p>Book lessons that fit your timetable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h3>How It Works</h3>
+            <div class="steps-grid">
+                <div class="step">
+                    <h4>Search</h4>
+                    <p>Enter your subject and location to find nearby tutors.</p>
+                </div>
+                <div class="step">
+                    <h4>Connect</h4>
+                    <p>Browse tutor profiles and choose the right one for you.</p>
+                </div>
+                <div class="step">
+                    <h4>Learn</h4>
+                    <p>Schedule a session and start learning immediately!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Subjects Section -->
+    <section class="popular-subjects">
+        <div class="container">
+            <h3>Popular Subjects</h3>
+            <div class="subjects-grid">
+                <p class="subject-card">Mathematics</p>
+                <p class="subject-card">Science</p>
+                <p class="subject-card">English</p>
+                <p class="subject-card">Computer Programming</p>
+                <p class="subject-card">More…</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h3>What Students Are Saying</h3>
+            <div class="testimonial-carousel">
+                <div class="testimonial">
+                    <p>"I found an amazing tutor for math. My grades improved drastically!"</p>
+                    <span>⭐⭐⭐⭐⭐ - Sarah</span>
+                </div>
+                <div class="testimonial">
+                    <p>"The platform made it so easy to connect with a tutor who fits my schedule."</p>
+                    <span>⭐⭐⭐⭐⭐ - John</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <h3>Ready to start learning?</h3>
+            <a href="#" class="primary-btn">Find Your Tutor Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+            <p>&copy; 2024 Find My Tutor. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

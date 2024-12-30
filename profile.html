@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Dashboard</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TutorLinc logo">
+                <h1 class="site-name">TutorLinc</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="manage-subject.html">Manage Subjects</a></li>
+                <li><a href="profile.html" class="active">Profile</a></li>
+                <li><a href="logout.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <div class="menu-toggle-container">
+                <button class="menu-toggle">☰</button> <!-- Hamburger Menu -->
+                <hr>
+            </div>
+
+            <header class="main-header">
+                <h1>Profile Information</h1>
+            </header>
+            
+            <div class="profile-photo">
+                <span>John Doe</span>
+                <img src="images/tutoring banner.jpg" alt="Profile Photo" class="profile-img">
+                <button>Edit</button>
+            </div>
+
+            <div class="location-link">
+                <a href="address.html" style="text-decoration: none; border-radius: 3px; color: black; padding: 0 5px; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.281);">Location</a>
+            </div>
+
+            <section class="profile">
+                <form id="profile-form">
+                    <label for="first-name">First name</label>
+                    <input type="text" id="first-name" name="first-name" required>
+
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last-name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" readonly required title="can't change email here">
+
+                    <label for="phone">Phone number</label>
+                    <input type="tel" id="phone" name="phone">
+
+                    <label for="qualification">Highest qualification</label>
+                    <select name="qualification" id="qualification">
+                        <option value="Diploma">Diploma</option>
+                        <option value="Bachelor's Degree">Bachelor's Degree</option>
+                        <option value="Master's Degree">Master's Degree</option>
+                        <option value="Doctoral Degree (PhD)">Doctoral Degree (PhD)</option>
+                    </select>
+
+                    <label for="bio">Bio</label>
+                    <textarea name="bio" id="bio"></textarea>
+
+                    <button type="submit" class="btn-update-profile">Update Profile</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview Dashboard</title>
+    <link rel="stylesheet" href="overview.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TutorLinc logo">
+                <h1 class="site-name">TutorLinc</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="" class="active">Overview</a></li>
+                <li><a href="manage-subject.html">Manage Subjects</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <div class="menu-toggle-container">
+                <button class="menu-toggle">☰</button> <!-- Hamburger Menu -->
+                <hr>
+            </div>
+
+            <header class="main-header">
+                <h1>Overview</h1>
+            </header>
+
+            <section class="stats">
+                <div class="stat-card">
+                    <h3>Total Subjects</h3>
+                    <p id="total-subjects">5</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Profile Completion</h3>
+                    <p id="profile-completion">80%</p>
+                </div>
+            </section>
+
+            <section class="actions">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <a href="manage-subject.html" class="btn btn-primary">Manage Subjects</a>
+                    <a href="profile.html" class="btn btn-secondary">Update Profile</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="overview.js"></script>
+</body>
+</html>

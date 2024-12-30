@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup-TutorLinc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="signup-header">
+        <h2>TUTOR ACCOUNT SETUP</h2>
+        <div class="signup-header-steps">
+            <span id="signup-personal-info">Personal info</span>
+            <span id="signup-address">Address</span>
+            <span id="signup-verify">Verification</span>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form class="signup-form" id="personal-info-form" method="" style="display: block;">
+            <!-- *********************Personal info********************* -->
+            <div class="form-group">
+                <label for="first-name">First name</label>
+                <input type="text" id="first-name" name="first-name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last-name">Last name</label>
+                <input type="text" id="last-name" name="last-name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <span id="email-error" style="color: red;"></span>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <span id="password-error" style="color: red;"></span>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <!-- <div class="form-group">
+                <label for="confirm-password">Confirm password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div> -->
+                        
+            <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" minlength="10" maxlength="10" required >
+            </div>
+            
+            <div class="form-group">
+                <label for="qualification">Highest qualification</label>
+                <select name="qualification" id="qualification">
+                    <option value="Diploma">Diploma</option>
+                    <option value="Bachelor's Degree">Bachelor's Degree</option>
+                    <option value="Master's Degree">Master's Degree</option>
+                    <option value="Doctoral Degree (PhD)">Doctoral Degree (PhD)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea name="bio" id="bio"></textarea>
+            </div>
+
+            <button type="submit" class="btn" id="personal-info-btn">Next</button>
+            
+            <div class="spinner" id="personal-info-spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+
+            <p>Already have an account? <a href="signin.html">Login</a></p>
+
+            <div id="home-container">
+                <a id="home-link" href="index.html">Home</a>
+            </div>
+        </form>
+        
+            <!-- *********************Address********************* -->
+        <form class="signup-form" method="" id="address-form"  style="display: none;">
+            <div class="form-group">
+                <label style="text-align: center; color: black;">Address</label>
+            </div>
+
+            <div class="form-group">
+                <label for="region">Region</label>
+                <select id="region" name="region">
+                    <option value="Greater Accra">Greater Accra</option>
+                    <option value="Ashanti">Ashanti</option>
+                    <option value="Western">Western</option>
+                    <option value="Central">Central</option>
+                    <option value="Eastern">Eastern</option>
+                    <option value="Volta">Volta</option>
+                    <option value="Oti">Oti</option>
+                    <option value="Northern">Northern</option>
+                    <option value="Savannah">Savannah</option>
+                    <option value="Upper East">Upper East</option>
+                    <option value="Upper West">Upper West</option>
+                    <option value="Bono">Bono</option>
+                    <option value="Bono East">Bono East</option>
+                    <option value="Ahafo">Ahafo</option>
+                    <option value="Western North">Western North</option>
+                    <option value="North East">North East</option>
+                  </select>                  
+            </div>
+
+            <div class="form-group">
+                <label for="town">Town/City</label>
+                <input type="text" id="town" name="town" required >
+            </div>
+
+            <div class="form-group">
+                <label for="street">Street</label>
+                <input type="text" id="street" name="street" required >
+            </div>
+
+            <button type="submit" class="btn" id="address-btn">Next</button>
+            
+            <div class="spinner" id="address-spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </form>
+
+            <!-- *********************Verification********************* -->
+        <form class="signup-form" id="verification-form" method="" style="display: none;">
+            <div class="verification-skip-container"><p id="verification-skip">Skip</p></div>
+            <div class="form-group">
+                <label for="id-card">Your ID card ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
+                <span id="id-card-error" style="color: red;"></span>
+                <input type="file" id="id-card" name="id-card" required>
+            </div>
+
+            <div class="form-group">
+                <label for="certificate">Your certificate ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
+                <span id="certificate-error" style="color: red;"></span>
+                <input type="file" id="certificate" name="certificate" required>
+            </div>
+
+            <button type="submit" class="btn" id="verification-btn">Done</button>
+            
+            <div class="spinner" id="verification-spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </form>
+
+        <div id="skip-container" style="display: none;">
+            <p id="skip-text" style="display: inline-block;">You will not be visible to any students until you upload your documents for verification</p> <br>
+            <button style="color: white; background-color: red;" id="skip-ok-btn">OK</button>
+            <button style="color: white; background-color: green;" id="skip-cancel-btn">UPLOAD</button>
+        </div>
+
+        <div id="registration-succeed-container" style="display: none;">
+            <p><mark style="color: rgb(1, 167, 1); background-color: white;"><big>Documents uploaded successfully!</big></mark> <br>
+               We'll review them ASAP, and once approved, you'll be visible to all students. Thank you!! <br>
+               You may login to your dashboard👇
+            </p>
+            <button style="color: white; background-color: #e74c3c; border: none;" id="registration-succeed-ok-btn">OK</button>
+        </div>
+    </div>
+<script src="signup.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Dashboard</title>
+    <link rel="stylesheet" href="address.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TutorLinc logo">
+                <h1 class="site-name">TutorLinc</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="manage-subject.html">Manage Subjects</a></li>
+                <li><a href="profile.html" class="active">Profile</a></li>
+                <li><a href="logout.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <div class="menu-toggle-container">
+                <button class="menu-toggle">☰</button> <!-- Hamburger Menu -->
+                <hr>
+            </div>
+
+            <header class="main-header">
+                <h1>Address</h1>
+            </header>
+
+            <div style="background-color: rgb(192, 253, 192); color: green; box-shadow: 0px 0px 20px 0px rgb(200, 255, 200); padding: 2px 20px;">
+                <p>If you've recently moved or changed your teaching location, please update your profile address to reflect your new location for accurate students search results.</p>
+            </div>
+
+            <div class="back-link">
+                <a href="profile.html">Back</a>
+            </div>
+
+            <section class="address">
+                <form id="address-form">
+                    <label for="region">Region</label>
+                    <input type="text" id="region" name="region" required>
+
+                    <label for="town">Town</label>
+                    <input type="text" id="town" name="town" required>
+
+                    <label for="street">Street</label>
+                    <input type="text" id="street" name="street" required>
+
+                    <button type="submit" class="btn-update-address">Update Address</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="address.js"></script>
+</body>
+</html>

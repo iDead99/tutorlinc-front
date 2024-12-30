@@ -1,0 +1,219 @@
+/* signup Form Styles */
+body, html{
+    scroll-behavior: smooth;
+    padding: 0;
+    margin: 0;
+}
+.verification-skip-container{
+    display: flex;
+    justify-content: right;
+    margin-bottom: 5px;
+}
+#verification-skip{
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.signup-header{
+    background-color: #007BFF;
+    position: sticky;
+    top: 0;
+    padding: 10px;
+}
+
+.signup-header h2{
+    text-align: center;
+    color: white;
+    text-decoration: underline;
+}
+.signup-header-steps{
+    display: flex;
+    justify-content: space-around;
+}
+.signup-header-steps span{
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+    padding: 2px 5px;
+    opacity: 80%;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.signup-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.signup-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: rgb(105, 105, 105);
+    margin-bottom: 8px;
+}
+
+.form-group input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-group input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+.form-group select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28A745;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 80%;
+}
+
+.spinner {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.spinner div {
+    width: 18px;
+    height: 18px;
+    background-color: #e74c3c;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out both;
+    animation: bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0); }
+    40% { -webkit-transform: scale(1.0); }
+}
+
+@keyframes bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0);
+        -webkit-transform: scale(0);
+    } 40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
+
+.signup-form p {
+    text-align: center;
+    margin-top: 15px;
+    color: #2c3e50;
+}
+
+.signup-form p a {
+    color: #e74c3c;
+    text-decoration: none;
+}
+
+.signup-form p a:hover {
+    text-decoration: underline;
+}
+
+#home-container{
+    text-decoration: none;
+    position: relative;
+    top: 10px;
+    text-align: center;
+}
+
+#skip-container {
+    color: black;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0px 0px 20px rgb(185, 185, 185);
+    width: 280px;
+    justify-content: center;
+    padding: 10px;
+    animation: display-skip 1s;
+}
+#skip-container button{
+    background-color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    text-align: center;
+    width: 70px;
+    height: 25px;
+    border-radius: 5px;
+    margin: 20px;
+    border: 0;
+}
+
+@keyframes display-skip{
+    from{
+        opacity: 10%;
+    }
+}
+
+#registration-succeed-container{
+    color: black;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0px 0px 20px rgb(185, 185, 185);
+    width: 280px;
+    justify-content: center;
+    padding: 10px;
+    animation: display-skip 1s;
+}
+#registration-succeed-container button{
+    background-color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    text-align: center;
+    width: 70px;
+    height: 25px;
+    border-radius: 5px;
+    border: 0;
+}
