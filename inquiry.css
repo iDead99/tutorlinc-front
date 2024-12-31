@@ -107,18 +107,18 @@ body {
     color: #2c3e50;
 }
 
-/* Subjects Section */
-.subjects-section {
+/* Inquiry Section */
+.inquiry-section {
     margin-top: 30px;
 }
 
-.subjects-section h2 {
+.inquiry-section h2 {
     font-size: 1.5em;
     margin-bottom: 20px;
     color: #2c3e50;
 }
 
-.subjects-table {
+.inquiry-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
@@ -128,23 +128,23 @@ body {
     overflow: hidden;
 }
 
-.subjects-table thead {
+.inquiry-table thead {
     background-color: #34495e;
     color: white;
 }
 
-.subjects-table th,
-.subjects-table td {
+.inquiry-table th,
+.inquiry-table td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ecf0f1;
 }
 
-.subjects-table th {
+.inquiry-table th {
     font-size: 1em;
 }
 
-.subjects-table tbody tr:hover {
+.inquiry-table tbody tr:hover {
     background-color: #f5f5f5;
 }
 
@@ -218,11 +218,11 @@ body {
     .main-header h1 {
         font-size: 1.5em;
     }
-    .subjects-section {
+    .inquiry-section {
         overflow-x: auto;
         scrollbar-width:none;
     }  
-    .subjects-table {
+    .inquiry-table {
         width: 100%;
     }
 

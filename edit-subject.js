@@ -8,7 +8,7 @@ const teachingDay = document.getElementById('teaching-day');
 const startTime = document.getElementById('start-time');
 const endTime = document.getElementById('end-time');
 
-const submitBtn = document.querySelector('.btn-add-subject');
+const submitBtn = document.querySelector('.btn-edit-subject');
 
 const operationDone = document.getElementById('operation-done');
 
@@ -30,19 +30,64 @@ if (!accessToken) {
     window.location.href = "signin.html";
 }
 
-document.getElementById('add-subject-form').addEventListener('submit', function(e) {
+document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const subjectId = params.get('id');
+
+    if (subjectId) {
+        getParticularSubject(subjectId); // Fetch the quiz data using the quizId
+    }
+});
+
+function getParticularSubject(id) {
+
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/${id}/`, {
+        headers: {
+            'Authorization': `JWT ${accessToken}`,
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network was not ok!');
+        }
+        return response.json();
+    })
+    .then(data => {
+        populateSubjectForm(data)
+    })
+    .catch(error => {
+        alert(error);
+    });
+}
+
+function populateSubjectForm(subjectData) {
+    subject.value = subjectData.name;
+    amount.value = subjectData.price;
+    teachingDay.value = subjectData.day_to_teach;
+    startTime.value = subjectData.start_time;
+    endTime.value = subjectData.end_time;
+}
+
+document.getElementById('edit-subject-form').addEventListener('submit', function(e) {
     e.preventDefault();
     submitBtn.disabled = true;
     if (submitBtn.disabled) {
         submitBtn.style.opacity = '80%';
     }
-    addSubject()
+    
+    const params = new URLSearchParams(window.location.search);
+    const subjectId = params.get('id');
+
+    if (subjectId) {
+        updateSubject(subjectId);
+    }
 });
 
-function addSubject() {
-
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/`, {
-        method: 'POST',
+function updateSubject(id) {
+    
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/${id}/`, {
+        method: 'PUT',
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',
@@ -65,25 +110,18 @@ function addSubject() {
             if (submitBtn.disabled === false) {
                 submitBtn.style.opacity = '100%';
             }
-            clearInput();
+            const params = new URLSearchParams(window.location.search);
+            const subjectId = params.get('id');
+        
+            if (subjectId) {
+                getParticularSubject(subjectId);
+            }
         }
         return response.json();
     })
     .then(data => {
     })
     .catch(error => {
-        submitBtn.disabled = false;
-        if (submitBtn.disabled === false) {
-            submitBtn.style.opacity = '100%';
-        }
         alert(error);
     });
-}
-
-function clearInput(){
-    subject.value = '';
-    amount.value = '';
-    teachingDay.value = '';
-    startTime.value = '';
-    endTime.value = '';
 }

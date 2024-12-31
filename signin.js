@@ -51,7 +51,7 @@ function login(){
             if(submitBtn.disabled===false){
                 submitBtn.style.opacity='100%';
             }
-            window.location.href="master-dashboard.html";
+            window.location.href="overview.html";
         }
         return response.json()
     })

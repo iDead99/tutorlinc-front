@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Dashboard</title>
-    <link rel="stylesheet" href="add-subject.css">
+    <title>Subject Dashboard</title>
+    <link rel="stylesheet" href="edit-subject.css">
 </head>
 <body>
     <div class="dashboard">
@@ -32,7 +32,7 @@
             </div>
 
             <header class="main-header">
-                <h1>Create New Subject</h1>
+                <h1>Edit Subject</h1>
             </header>
 
             <div id="operation-done" style=" display: none; background-color: rgb(192, 253, 192); color: green; box-shadow: 0px 0px 20px 0px rgb(200, 255, 200); padding: 2px 20px;">
@@ -43,8 +43,8 @@
                 <a href="subject.html">Back</a>
             </div>
 
-            <section class="add-subject">
-                <form id="add-subject-form">
+            <section class="edit-subject">
+                <form id="edit-subject-form">
                     <label for="subject">Subject</label>
                     <input type="text" id="subject" name="subject" required>
 
@@ -52,20 +52,20 @@
                     <input type="text" id="amount" name="amount" required>
 
                     <label for="teaching-day">Day to teach</label>
-                    <input type="text" id="teaching-day" name="teaching-day" required>
+                    <input type="teaching-day" id="teaching-day" name="teaching-day" required>
 
                     <label for="start-time">Start time</label>
-                    <input type="time" id="start-time" name="start-time" required>
+                    <input type="text" id="start-time" name="start-time" required>
 
                     <label for="end-time">End time</label>
-                    <input type="time" id="end-time" name="end-time" required>
+                    <input type="text" id="end-time" name="end-time" required>
 
-                    <button type="submit" class="btn-add-subject">Add Subject</button>
+                    <button type="submit" class="btn-edit-subject">Update Subject</button>
                 </form>
             </section>
         </main>
     </div>
 
-    <script src="add-subject.js"></script>
+    <script src="edit-subject.js"></script>
 </body>
 </html>
