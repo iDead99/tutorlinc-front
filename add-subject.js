@@ -30,6 +30,22 @@ if (!accessToken) {
     window.location.href = "signin.html";
 }
 
+subject.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+amount.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+teachingDay.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+startTime.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+endTime.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+
 document.getElementById('add-subject-form').addEventListener('submit', function(e) {
     e.preventDefault();
     submitBtn.disabled = true;

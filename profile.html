@@ -36,41 +36,49 @@
             </header>
             
             <div class="profile-photo">
-                <span>John Doe</span>
-                <img src="images/tutoring banner.jpg" alt="Profile Photo" class="profile-img">
-                <button>Edit</button>
+                <span id="profile-name"></span>
+                <img src="" alt="Profile Photo" class="profile-image">
+                <input type="file" id="profile-image-input" style="display: none;">
+                <button id="upload-button">Edit</button>
             </div>
+
+            <!-- Modal for Image Preview -->
+        <div id="image-preview-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Preview Profile Picture</h3>
+                <img id="image-preview" src="" alt="Image Preview" class="preview-image">
+                <div class="modal-actions">
+                    <button id="save-button" class="btn-save">Save</button>
+                    <button id="cancel-button" class="btn-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
 
             <div class="location-link">
                 <a href="address.html" style="text-decoration: none; border-radius: 3px; color: black; padding: 0 5px; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.281);">Location</a>
             </div>
+            
+            <a href="edit-profile.html" style="text-decoration: none;"><button class="edit-profile-btn">Edit Profile</button></a>
 
             <section class="profile">
                 <form id="profile-form">
                     <label for="first-name">First name</label>
-                    <input type="text" id="first-name" name="first-name" required>
+                    <input type="text" id="first-name" name="first-name" readonly>
 
                     <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" name="last-name" required>
+                    <input type="text" id="last-name" name="last-name" readonly>
 
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" readonly required title="can't change email here">
+                    <input type="email" id="email" name="email" readonly title="can't change email here">
 
                     <label for="phone">Phone number</label>
-                    <input type="tel" id="phone" name="phone">
+                    <input type="tel" id="phone" name="phone" readonly>
 
                     <label for="qualification">Highest qualification</label>
-                    <select name="qualification" id="qualification">
-                        <option value="Diploma">Diploma</option>
-                        <option value="Bachelor's Degree">Bachelor's Degree</option>
-                        <option value="Master's Degree">Master's Degree</option>
-                        <option value="Doctoral Degree (PhD)">Doctoral Degree (PhD)</option>
-                    </select>
+                    <input type="text" id="qualification" name="qualification" readonly>
 
                     <label for="bio">Bio</label>
-                    <textarea name="bio" id="bio"></textarea>
-
-                    <button type="submit" class="btn-update-profile">Update Profile</button>
+                    <textarea name="bio" id="bio" readonly></textarea>
                 </form>
             </section>
         </main>

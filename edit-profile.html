@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Dashboard</title>
-    <link rel="stylesheet" href="address.css">
+    <link rel="stylesheet" href="edit-profile.css">
 </head>
 <body>
     <div class="dashboard">
@@ -32,12 +32,8 @@
             </div>
 
             <header class="main-header">
-                <h1>Address</h1>
+                <h1>Edit Profile</h1>
             </header>
-
-            <div id="update-message" style="background-color: rgb(192, 253, 192); color: green; box-shadow: 0px 0px 20px 0px rgb(200, 255, 200); padding: 2px 20px;">
-                <p>If you've recently moved or changed your teaching location, please update your profile address to reflect your new location for accurate students search results.</p>
-            </div>
 
             <div id="operation-done" style=" display: none; background-color: rgb(192, 253, 192); color: green; box-shadow: 0px 0px 20px 0px rgb(200, 255, 200); padding: 2px 20px;">
                 <p>Operation done successfully!</p>
@@ -47,23 +43,37 @@
                 <a href="profile.html">Back</a>
             </div>
 
-            <section class="address">
-                <form id="address-form">
-                    <label for="region">Region</label>
-                    <input type="text" id="region" name="region" required>
+            <section class="edit-profile">
+                <form id="edit-profile-form">
+                    <label for="first-name">First name</label>
+                    <input type="text" id="first-name" name="first-name" required>
 
-                    <label for="town">Town</label>
-                    <input type="text" id="town" name="town" required>
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last-name" required>
 
-                    <label for="street">Street</label>
-                    <input type="text" id="street" name="street" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" readonly title="can't change email here">
 
-                    <button type="submit" class="btn-update-address">Update Address</button>
+                    <label for="phone">Phone number</label>
+                    <input type="tel" id="phone" name="phone" required>
+
+                    <label for="qualification">Highest qualification</label>
+                    <select name="qualification" id="qualification">
+                        <option value="Diploma">Diploma</option>
+                        <option value="Bachelor's Degree">Bachelor's Degree</option>
+                        <option value="Master's Degree">Master's Degree</option>
+                        <option value="Doctoral Degree (PhD)">Doctoral Degree (PhD)</option>
+                    </select>
+
+                    <label for="bio">Bio</label>
+                    <textarea name="bio" id="bio"></textarea>
+
+                    <button type="submit" class="btn-edit-profile">Update Profile</button>
                 </form>
             </section>
         </main>
     </div>
 
-    <script src="address.js"></script>
+    <script src="edit-profile.js"></script>
 </body>
 </html>

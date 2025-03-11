@@ -19,20 +19,42 @@ menuToggle.addEventListener('click', () => {
     }
 });
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    getSubject();
-})
-
 const accessToken=localStorage.getItem('accessToken');
+
 if(!accessToken){
-    window.location.href="login.html";
+    window.location.href="signin.html";
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    getTeacher();
+})
 
-function getSubject(){
 
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/subjects/', {
+function getTeacher(){
+
+    fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
+        headers: {
+            'Authorization': `JWT ${accessToken}`,
+            'Content-Type': 'application/json',          
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            throw new Error('network not ok!')
+        }
+        return response.json()
+    })
+    .then(data => {
+        getSubject(data.id);
+    })
+    .catch(error => {
+        alert(error)
+    })
+}
+
+function getSubject(id){
+
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/?teacher__id=${id}`, {
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',

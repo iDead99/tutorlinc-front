@@ -89,13 +89,13 @@ document.getElementById('personal-info-form').addEventListener('submit',function
    //    window.location.href='#password-error';
    //    return;
    // }
-
-    const userData={
-        first_name: firstName.value.charAt(0).toUpperCase() + firstName.value.slice(1).toLowerCase(),
-        last_name: lastName.value.charAt(0).toUpperCase() + lastName.value.slice(1).toLowerCase(),
-        email: email.value,
-        password: password.value,
-        };
+   
+   const userData={
+      first_name: firstName.value.charAt(0).toUpperCase() + firstName.value.slice(1).toLowerCase(),
+      last_name: lastName.value.charAt(0).toUpperCase() + lastName.value.slice(1).toLowerCase(),
+      email: email.value,
+      password: password.value,
+      };
 
    firstRegistration(userData);
 
@@ -223,8 +223,7 @@ function secondRegistration(secondUserData){
  });
  }
 
-
-document.getElementById('address-form').addEventListener('submit',function(e) {
+document.getElementById('address-form').addEventListener('submit', function(e) {
    e.preventDefault()
 
       const addressData={
@@ -243,6 +242,7 @@ document.getElementById('address-form').addEventListener('submit',function(e) {
 
 function AddressRegistration(addressData){
    const accessToken=localStorage.getItem('accessToken');
+   
 
    fetch('http://127.0.0.1:8000/manage_tutorlinc/addresses/', {
    method: 'POST',
@@ -276,11 +276,16 @@ function AddressRegistration(addressData){
    return response.json();
 })
 .catch(error =>{
+   addressSpinner.style.display='none';
+   addressBtn.disabled=false;
+   if(addressBtn.disabled===false){
+      addressBtn.style.opacity='100%';
+   }
    console.log(error, 'Address registration failed')
 });
 }
 
-document.getElementById('verification-form').addEventListener('submit', function (e) {
+document.getElementById('verification-form').addEventListener('submit', (e) => {
    e.preventDefault();
 
    const verificationData = {
@@ -313,11 +318,8 @@ function VerificationRegistration(verificationData) {
          verificationBtn.disabled = false;
          verificationBtn.style.opacity = '100%';
 
-         if (!response.ok) {
-            return response.json().catch(() => {
-               console.error('Invalid JSON response');
-            }).then(error => {
-               if (error) {
+         if(!response.ok){
+            return response.json().then(error =>{
                   if (error.id_card && idCardError) {
                      idCardError.textContent = error.id_card;
                      window.location.href = '#id-card-error';
@@ -326,9 +328,9 @@ function VerificationRegistration(verificationData) {
                      certificateError.textContent = error.certificate;
                      window.location.href = '#certificate-error';
                   }
-               }
             });
-         } else {
+         }
+         else {
             skipContainer.style.display = 'none';
             document.getElementById('personal-info-form').style.display = 'none';
             document.getElementById('address-form').style.display = 'none';

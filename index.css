@@ -3,6 +3,8 @@ body, html {
     margin: 0;
     font-family: 'Arial', sans-serif;
     color: #333;
+    scroll-behavior: smooth;
+    /* background-color: rgba(0, 0, 255, 0.082); */
 }
 
 h3 {
@@ -97,14 +99,68 @@ h3 {
     background-color: #FFC107;
     color: #333;
 }
-.teacher-section{
-    padding: 10px 0;
+.teacher-list-section{
+    padding: 10px;
+    height: 20em;
+    overflow: auto;
+    scrollbar-width: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 .teacher-container{
-    border: 2px solid black;
-    height: 40em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    width: 20%;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 0 2px 4px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
-
+.teacher-container:hover{
+    transform: scale(1.05, 1.05);
+    box-shadow: 0 2px 3px #007bffad;
+}
+.status-container{
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+.activation-status-active{
+    font-weight: bold;
+    background-color: rgb(192, 253, 192);
+    box-shadow: 0px 0px 20px 0px rgb(200, 255, 200);
+    color: green;
+    border-radius: 5px;
+    padding: 2px;
+}
+.activation-status-inactive{
+    font-weight: bold;
+    color: red;
+    border-radius: 5px;
+    padding: 2px;
+}
+.Verification-status{
+    border: 2px solid black;
+}
+.teacher-image{
+    width: 8em;
+    height: 8em;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.teacher-name{
+    font-size: 18px;
+    padding: 2px;
+    border-radius: 5px;
+    text-align: center;
+}
 
 /* Hero Animation Styles */
 @keyframes slideInDown {
@@ -192,11 +248,11 @@ h3 {
     animation-delay: 1.5s;
 }
 
-/* Features, How It Works, Popular Subjects, Testimonials, CTA */
+/* Features, How It Works, Popular Subjects, Comments, CTA */
 .features,
 .how-it-works,
 .popular-subjects,
-.testimonials,
+.comments,
 .cta {
     padding: 20px 0;
     margin: 20px 0;
@@ -224,18 +280,30 @@ h3 {
     /* padding: 10px; */
 }
 
-.testimonials .testimonial-carousel {
+.comments .comment-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    max-height: 25em;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 
-.testimonial {
+.comment {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
     margin: 10px;
     flex: 1 1 45%;
+}
+
+.comment-form{
+    margin-left: 5px;
+}
+.comment-form input, textarea{
+    width: 60%;
+    padding: 5px;
+    margin-bottom: 5px;
 }
 
 footer {
@@ -260,6 +328,17 @@ footer {
     color: white;
     text-decoration: none;
 }
+
+.btn-save {
+    color: white;
+    background: #2980b9;
+}
+
+.btn-cancel {
+    background: #2980b9;
+    color: white;
+}
+
 
 /* Responsive Styles */
 @media (max-width: 480px) {
@@ -323,5 +402,11 @@ footer {
         position: absolute;
         right: 0;
         margin-right: 10px;
+    }
+    .teacher-list-section{
+        margin-top: 20px;
+    }
+    .teacher-container{
+        width: 40%;
     }
 }

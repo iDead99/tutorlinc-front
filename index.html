@@ -19,17 +19,16 @@
             <nav class="nav-container">
                 <ul class="nav-links">
                     <li><a href="#">Home 🏠</a></li>
-                    <li><a href="#">How It Works ❓</a></li>
-                    <li><a href="#">Find a Teacher 🔎</a></li>
-                    <li><a href="#">Become a Tutor 📚</a></li>
-                    <li><a href="#">Contact Us 📞</a></li>
+                    <li><a href="#how-it-works">How It Works ❓</a></li>
+                    <li><a href="#search-input">Find a Teacher 🔎</a></li>
+                    <li><a href="signup.html">Become a Tutor 📚</a></li>
+                    <li><a href="#footer">Contact Us 📞</a></li>
                     <li><a href="signin.html" class="login-btn">Sign Up / Log In</a></li>                    
                 </ul>
             </nav>
         </div>
     </header>
     
-
     <!-- Hero Section -->
     <section class="hero">
         <div class="tutoring-banner">
@@ -38,7 +37,7 @@
         <div class="hero-content">
             <h2>Find the Perfect Private Tutor Near You</h2>
             <p>Connect with qualified tutors in your area for personalized learning</p>
-            <form class="search-bar">
+            <form class="search-bar" id="search-bar">
                 <!-- <input type="text" placeholder="What do you want to learn?"> -->
                 <input id="search-input" type="text" placeholder="Enter your location">
                 <button type="submit">Search</button>
@@ -49,9 +48,8 @@
             </div>
         </div>
     </section>
-    <!-- <section class="teacher-section">
-        <div class="teacher-container"></div>
-    </section> -->
+
+    <section class="teacher-list-section"></section>
 
     <!-- Features Section -->
     <section class="features">
@@ -78,7 +76,7 @@
     </section>
 
     <!-- How It Works Section -->
-    <section class="how-it-works">
+    <section class="how-it-works" id="how-it-works">
         <div class="container">
             <h3>How It Works</h3>
             <div class="steps-grid">
@@ -99,7 +97,7 @@
     </section>
 
     <!-- Popular Subjects Section -->
-    <section class="popular-subjects">
+    <section class="popular-subjects" id="popular-subjects">
         <div class="container">
             <h3>Popular Subjects</h3>
             <div class="subjects-grid">
@@ -112,20 +110,20 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
+    <!-- Comments Section -->
+    <section class="comments">
         <div class="container">
             <h3>What Students Are Saying</h3>
-            <div class="testimonial-carousel">
-                <div class="testimonial">
-                    <p>"I found an amazing tutor for math. My grades improved drastically!"</p>
-                    <span>⭐⭐⭐⭐⭐ - Sarah</span>
-                </div>
-                <div class="testimonial">
-                    <p>"The platform made it so easy to connect with a tutor who fits my schedule."</p>
-                    <span>⭐⭐⭐⭐⭐ - John</span>
-                </div>
+            <div class="comment-form-container">
+                <form class="comment-form">
+                    <textarea name="comment-input" id="comment-input" rows="4" required placeholder="Write your comment"></textarea>
+                    <!-- <input type="text" id="commenter" placeholder="Enter name (Optional)"> -->
+                    <br>
+                    <button type="submit" class="comment-btn" style="padding: 5px">Comment</button>
+                </form>
             </div>
+            <div class="comment-container">
+                <div class="comment"></div>
         </div>
     </section>
 
@@ -133,25 +131,25 @@
     <section class="cta">
         <div class="container">
             <h3>Ready to start learning?</h3>
-            <a href="#" class="primary-btn">Find Your Tutor Now</a>
+            <a href="#search-input" class="primary-btn">Find Your Tutor Now</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id="footer">
         <div class="container">
             <ul class="footer-links">
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">FAQs</a></li>
                 <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Email Us</a></li>
             </ul>
             <div class="social-icons">
                 <a href="#">Facebook</a>
                 <a href="#">Twitter</a>
                 <a href="#">Instagram</a>
             </div>
-            <p>&copy; 2024 Find My Tutor. All Rights Reserved.</p>
+            <p>&copy; 2025 Find My Tutor. All Rights Reserved.</p>
         </div>
     </footer>
 

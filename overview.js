@@ -24,12 +24,35 @@ if (!accessToken) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    getSubject();
+    getTeacher();
 })
 
-function getSubject(){
+function getTeacher(){
 
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/subjects/', {
+    fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
+        headers: {
+            'Authorization': `JWT ${accessToken}`,
+            'Content-Type': 'application/json',          
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            throw new Error('network not ok!')
+        }
+        return response.json()
+    })
+    .then(data => {
+        getSubject(data.id);
+        getInquiry(data.id)
+    })
+    .catch(error => {
+        alert(error)
+    })
+}
+
+function getSubject(id){
+
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/?teacher__id=${id}`, {
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',
@@ -47,6 +70,32 @@ function getSubject(){
             subjectNumber++;
         })
         totalSubject.textContent=subjectNumber;
+    })
+    .catch(error => {
+        alert(error);
+    })
+}
+
+function getInquiry(id){
+
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/inquiries/?teacher__id=${id}`, {
+        headers: {
+            'Authorization': `JWT ${accessToken}`,
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            throw new Error ('Network was not ok!')
+        }
+        return response.json();
+    })
+    .then(data => {
+        let inquiryNumber=0;
+        data.forEach(() => {
+            inquiryNumber++;
+        })
+        totalInquiry.textContent=inquiryNumber;
     })
     .catch(error => {
         alert(error);

@@ -30,12 +30,28 @@ if (!accessToken) {
     window.location.href = "signin.html";
 }
 
+subject.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+amount.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+teachingDay.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+startTime.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+endTime.addEventListener('input', () => {
+    operationDone.style.display = 'none';
+})
+
 document.addEventListener('DOMContentLoaded', function() {
     const params = new URLSearchParams(window.location.search);
     const subjectId = params.get('id');
 
     if (subjectId) {
-        getParticularSubject(subjectId); // Fetch the quiz data using the quizId
+        getParticularSubject(subjectId);
     }
 });
 
