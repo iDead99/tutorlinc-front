@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function getTeacher(){
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -123,7 +123,7 @@ document.querySelector('.comment-form').addEventListener('submit', function(e) {
 })
 
 function addComment(){
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/comments/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/comments/', {
 
         method: 'POST',
         headers: {
@@ -152,7 +152,7 @@ function addComment(){
 }
 
 function getComment(){
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/comments/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/comments/', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -218,7 +218,7 @@ locationSearchInput.addEventListener('input', function () {
 });
 
 function searchLocation(locationQuery) {
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/addresses/?search=${locationQuery}`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/addresses/?search=${locationQuery}`, {
         headers: { 'Content-Type': 'application/json' },
     })
     .then(response => {
@@ -251,7 +251,7 @@ function searchLocation(locationQuery) {
 }
 
 function searchSubject(teacherId) {
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/?teacher__id=${teacherId}`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/subjects/?teacher__id=${teacherId}`, {
         headers: { 'Content-Type': 'application/json' },
     })
     .then(response => {

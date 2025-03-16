@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function getTeacher(){
 
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',          
@@ -54,7 +54,7 @@ function getTeacher(){
 
 function getSubject(id){
 
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/?teacher__id=${id}`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/subjects/?teacher__id=${id}`, {
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ function getSubject(id){
 
 function deleteSubject(id){
 
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/${id}/`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/subjects/${id}/`, {
         method: 'DELETE',
         headers: {
             'Authorization': `JWT ${accessToken}`,

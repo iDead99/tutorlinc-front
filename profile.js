@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function getUser(){
 
-    fetch('http://127.0.0.1:8000/auth/users/me/', {
+    fetch('https://tutorlinc-ws.onrender.com/auth/users/me/', {
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',          
@@ -68,7 +68,7 @@ function getUser(){
 
 function getTeacher(){
 
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',          
@@ -88,7 +88,7 @@ function getTeacher(){
             profileImage.src = "./images/logo.png";
         }
         else{
-            profileImage.src = `http://127.0.0.1:8000${data.profile_picture}`;
+            profileImage.src = `https://tutorlinc-ws.onrender.com${data.profile_picture}`;
         }
         
         if(data.bio === ''){
@@ -138,7 +138,7 @@ saveButton.addEventListener('click', (event) => {
         const formData = new FormData();
         formData.append('profile_picture', file);
 
-        fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
+        fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
             method: 'PATCH',
             headers: {
                 'Authorization': `JWT ${accessToken}`

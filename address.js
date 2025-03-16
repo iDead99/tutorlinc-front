@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function getTeacher(){
 
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',          
@@ -70,7 +70,7 @@ function getTeacher(){
 }
 
 function getAddress(id){
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/addresses/?teacher__id=${id}`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/addresses/?teacher__id=${id}`, {
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',          
@@ -106,7 +106,7 @@ document.getElementById('address-form').addEventListener('submit',function(e) {
 })
 
 function getTeacherForAddressUpdate(){
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
         headers: {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json',          
@@ -127,7 +127,7 @@ function getTeacherForAddressUpdate(){
 }
 
 function updateAddress(id) {
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/addresses/${id}/`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/addresses/${id}/`, {
         method: 'PUT',
         headers: {
             'Authorization': `JWT ${accessToken}`,

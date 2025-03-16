@@ -24,7 +24,7 @@ document.querySelector('.login-form').addEventListener('submit', function(e) {
 })
 
 function login(){
-    fetch('http://127.0.0.1:8000/auth/jwt/create', {
+    fetch('https://tutorlinc-ws.onrender.com/auth/jwt/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

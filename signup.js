@@ -107,7 +107,7 @@ document.getElementById('personal-info-form').addEventListener('submit',function
 })
 
 function firstRegistration(userData){
-    fetch("http://127.0.0.1:8000/auth/users/", {
+    fetch("https://tutorlinc-ws.onrender.com/auth/users/", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -155,7 +155,7 @@ function firstRegistration(userData){
     }
 
 function authenticateUser(userData){
-    fetch("http://127.0.0.1:8000/auth/jwt/create",{
+    fetch("https://tutorlinc-ws.onrender.com/auth/jwt/create",{
         method: 'POST',
         headers: {
            'Content-Type': 'application/json'
@@ -187,7 +187,7 @@ function authenticateUser(userData){
 function secondRegistration(secondUserData){
     const accessToken=localStorage.getItem('accessToken');
 
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
     method: 'PUT',
     headers: {
        'Authorization': `JWT ${accessToken}`,
@@ -244,7 +244,7 @@ function AddressRegistration(addressData){
    const accessToken=localStorage.getItem('accessToken');
    
 
-   fetch('http://127.0.0.1:8000/manage_tutorlinc/addresses/', {
+   fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/addresses/', {
    method: 'POST',
    headers: {
       'Authorization': `JWT ${accessToken}`,
@@ -306,7 +306,7 @@ function VerificationRegistration(verificationData) {
    formData.append('id_card', verificationData.id_card);
    formData.append('certificate', verificationData.certificate);
 
-   fetch('http://127.0.0.1:8000/manage_tutorlinc/verifications/', {
+   fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/verifications/', {
       method: 'POST',
       headers: {
          'Authorization': `JWT ${accessToken}`,

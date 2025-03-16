@@ -57,7 +57,7 @@ document.getElementById('add-subject-form').addEventListener('submit', function(
 
 function addSubject() {
 
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/subjects/`, {
         method: 'POST',
         headers: {
             'Authorization': `JWT ${accessToken}`,
