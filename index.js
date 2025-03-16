@@ -1,6 +1,15 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
+const locationSearchInput = document.getElementById('location-search-input');
+const subjectSearchInput = document.getElementById('subject-search-input');
+
+const locationResultContainer = document.querySelector('.location-result-container');
+const subjectResultContainer = document.querySelector('.subject-result-container');
+
+const primaryBtn = document.querySelector('.primary-btn');
+const secondaryBtn = document.querySelector('.secondary-btn');
+
 const commentContainer = document.querySelector('.comment-container');
 const commentInput = document.getElementById('comment-input');
 
@@ -15,6 +24,15 @@ menuToggle.addEventListener('click', () => {
         menuToggle.textContent = '☰'; // Change back to 'hamburger' icon
     }
 });
+
+function hidePrimarySecondaryBtn(){
+    primaryBtn.style.display = 'none';
+    secondaryBtn.style.display = 'none';
+}
+function showPrimarySecondaryBtn(){
+    primaryBtn.style.display = 'initial';
+    secondaryBtn.style.display = 'initial';
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     getTeacher()
@@ -51,7 +69,7 @@ function displayTeacher(teacherData){
         teacherContainer.className = 'teacher-container';
         teacherContainer.addEventListener('click', function() {
             if(teachers.id){
-                window.location.href = `teacher-preview.html?id=${teachers.id}`;
+                window.location.href = `teacher-preview.html?id=${teachers.id}&type=teacher`;
             }
         })
 
@@ -164,4 +182,127 @@ function displayComment(commentData){
         comment.appendChild(commentText);
         commentContainer.appendChild(comment);
     })
+}
+
+
+let fetchedSubjects = []; // Store subjects for filtering
+let debounceTimer = null; // Timer for debouncing API requests
+
+locationSearchInput.addEventListener('input', function () {
+    if(locationSearchInput.value !== ''){
+        hidePrimarySecondaryBtn();
+    }
+    else{
+        showPrimarySecondaryBtn();
+    }
+
+    if (locationSearchInput.value.trim() === '') {
+        subjectSearchInput.disabled = true;
+        subjectSearchInput.title = "Please enter location before searching subjects";
+        subjectSearchInput.value = '';
+    } else {
+        subjectSearchInput.disabled = false;
+        subjectSearchInput.title = ""; // Clear the tooltip when enabled
+    }
+
+    clearTimeout(debounceTimer);
+    
+    const query = locationSearchInput.value.trim();
+    if (query === '') {
+        locationResultContainer.innerHTML = '';
+        subjectResultContainer.innerHTML = '';
+    } else {
+        debounceTimer = setTimeout(() => searchLocation(query), 300); // Debounce API call
+    }
+});
+
+function searchLocation(locationQuery) {
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/addresses/?search=${locationQuery}`, {
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Network was not ok');
+        return response.json();
+    })
+    .then(data => {
+        locationResultContainer.innerHTML = '';
+        fetchedSubjects = [];
+        let uniqueTeachers = new Set(); // Store unique teacher IDs to prevent duplicate fetches
+
+        if (data.length === 0) {
+            locationResultContainer.innerHTML = '<b style="color: black;">No result found!</b>';
+            return;
+        }
+
+        data.forEach(location => {
+            const locationSearchList = document.createElement('li');
+            locationSearchList.className = 'location-search';
+            locationSearchList.textContent = `${location.street} - ${location.town} - ${location.region}`;
+            locationResultContainer.appendChild(locationSearchList);
+
+            if (location.teacher && !uniqueTeachers.has(location.teacher)) {
+                uniqueTeachers.add(location.teacher);
+                searchSubject(location.teacher);
+            }
+        });
+    })
+    .catch(error => alert(error));
+}
+
+function searchSubject(teacherId) {
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/?teacher__id=${teacherId}`, {
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Network was not ok');
+        return response.json();
+    })
+    .then(data => {
+        fetchedSubjects = fetchedSubjects.concat(data); // Store subjects for filtering
+        filterSubjects(subjectSearchInput.value); // Apply existing subject filter
+    })
+    .catch(error => alert(error));
+}
+
+subjectSearchInput.addEventListener('input', function () {
+    if(subjectSearchInput.value !== ''){
+        hidePrimarySecondaryBtn();
+    }
+    else{
+        showPrimarySecondaryBtn();
+    }
+
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => filterSubjects(subjectSearchInput.value), 300);
+});
+
+function filterSubjects(query) {
+    subjectResultContainer.innerHTML = '';
+    query = query.trim();
+
+    if (query === '') {
+        return;
+    }
+
+    const filteredSubjects = fetchedSubjects.filter(subject =>
+        subject.name.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if (filteredSubjects.length === 0) {
+        subjectResultContainer.innerHTML = '<b style="color: black;">No result found!</b>';
+    } else {
+        filteredSubjects.forEach(subject => {
+            const subjectSearchList = document.createElement('li');
+            subjectSearchList.className = 'subject-search';
+            subjectSearchList.textContent = subject.name;
+
+            subjectSearchList.addEventListener('click', function () {
+                if (subject.teacher) {
+                    window.location.href = `teacher-preview.html?id=${subject.teacher}&type=subject`;
+                }
+            });
+
+            subjectResultContainer.appendChild(subjectSearchList);
+        });
+    }
 }

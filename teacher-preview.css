@@ -73,6 +73,12 @@ h3 {
     border-radius: 50%;
     border: 3px solid white;
 }
+.inquiry-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 .inquiry-btn {
     background-color: #2ecc71;
@@ -83,6 +89,7 @@ h3 {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 5px;
 }
 .inquiry-btn:hover {
     background-color: #27ae60;

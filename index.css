@@ -75,6 +75,42 @@ h3 {
     text-align: center;
 }
 
+/* Search Results Styling */
+.subject-search, .location-search {
+    /* display: block; */
+    list-style: none;
+    padding: 12px 15px;
+    margin: 5px;
+    font-size: 16px;
+    color: #333;
+    background: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s ease;
+    animation: fadeIn 1s ease-out forwards;
+    cursor: pointer;
+}
+.location-search {
+    cursor: initial;
+    margin: initial;
+}
+
+/* Last item should have no border */
+.subject-search:last-child, .location-search:last-child {
+    border-bottom: none;
+}
+
+.subject-search:hover {
+    background: #007bff;
+    color: white;
+}
+
+/* No Results Message */
+.no-result {
+    text-align: center;
+    font-weight: bold;
+    color: #ff3b30;
+    padding: 12px;
+}
 
 .primary-btn,
 .secondary-btn,
@@ -231,12 +267,12 @@ h3 {
     width: 200px;
 }
 
-.search-bar button {
+/* .search-bar button {
     padding: 10px 20px;
     background-color: #FFC107;
     border: none;
     cursor: pointer;
-}
+} */
 .cta .primary-btn {
     animation: pulse 1.5s infinite;
     animation-delay: 1s;
@@ -361,6 +397,12 @@ footer {
     .search-bar button {
         padding: 10px;
     }
+
+    .subject-search, .location-search {
+        font-size: 14px;
+        padding: 10px;
+    }
+
     .primary-btn,
     .secondary-btn,
     .cta .primary-btn {

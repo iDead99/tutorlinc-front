@@ -8,11 +8,10 @@ const message = document.getElementById('message');
 const operationDone = document.getElementById('operation-done');
 
 const inquiryBtn = document.querySelector('.inquiry-btn');
+const teacherStatusMessage = document.querySelector('.teacher-status-msg');
 const submitBtn = document.querySelector('.btn-submit');
 
-inquiryBtn.addEventListener('click', function() {
-    document.querySelector('.modal').style.display = 'flex';
-})
+
 
 fullName.addEventListener('input', () => {
     operationDone.style.display = 'none';
@@ -28,14 +27,22 @@ message.addEventListener('input', () => {
 })
 
 let teacherId;
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() { 
     const params = new URLSearchParams(window.location.search);
-    teacherId = params.get('id');
+    const teacherId = params.get('id');
+    const type = params.get('type'); 
 
     if (teacherId) {
-        getTeacher(teacherId);
-        getSubjects(teacherId);
-        getAddress(teacherId);
+        if (type === 'teacher') {
+            getTeacher(teacherId);
+            getSubjects(teacherId);
+            getAddress(teacherId);
+        }
+        else if (type === 'subject') {
+            getTeacher(teacherId);
+            getSubjects(teacherId);
+            getAddress(teacherId);
+        }
     }
 });
 
@@ -67,6 +74,30 @@ function getTeacher(teacher_id){
 
         const teacherName = document.getElementById('teacher-name');
         teacherName.textContent = `${data.user.first_name} ${data.user.last_name}`;
+
+        if(data.availability_status === 'Active'){
+            teacherStatusMessage.innerHTML = `This teacher is <b>${data.availability_status}<b>✅`;
+        }
+        else{
+            teacherStatusMessage.innerHTML = `This teacher is <b>${data.availability_status}<b>❌`;
+        }
+
+        teacherAvailabilityStatus = data.availability_status;
+
+        inquiryBtn.addEventListener('click', function() {
+            if(data.availability_status === 'Active'){
+                document.querySelector('.modal').style.display = 'flex';
+            }
+            else{
+                const response = confirm('This teacher is currently inactive. Would you like to proceed with your inquiry?')
+                if (response === true){
+                    document.querySelector('.modal').style.display = 'flex';
+                }
+                else{
+                    return;
+                }
+            }
+        })
     })
     .catch(error => {
         alert(error)

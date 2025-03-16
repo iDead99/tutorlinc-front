@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find My Tutor</title>
+    <title>TutorLinc</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
@@ -20,7 +20,7 @@
                 <ul class="nav-links">
                     <li><a href="#">Home 🏠</a></li>
                     <li><a href="#how-it-works">How It Works ❓</a></li>
-                    <li><a href="#search-input">Find a Teacher 🔎</a></li>
+                    <li><a href="#location-tfsearch-input">Find a Teacher 🔎</a></li>
                     <li><a href="signup.html">Become a Tutor 📚</a></li>
                     <li><a href="#footer">Contact Us 📞</a></li>
                     <li><a href="signin.html" class="login-btn">Sign Up / Log In</a></li>                    
@@ -38,16 +38,20 @@
             <h2>Find the Perfect Private Tutor Near You</h2>
             <p>Connect with qualified tutors in your area for personalized learning</p>
             <form class="search-bar" id="search-bar">
-                <!-- <input type="text" placeholder="What do you want to learn?"> -->
-                <input id="search-input" type="text" placeholder="Enter your location">
-                <button type="submit">Search</button>
+                <input id="location-search-input" type="text" placeholder="Enter your location">
+                <input id="subject-search-input" type="text" placeholder="What do you want to learn?">
             </form>
+
+            <ul class="location-result-container"></ul>  <!-- New container for locations -->
+            <ul class="subject-result-container"></ul>  <!-- New container for subjects -->
+
             <div class="cta-buttons">
-                <a href="#secondary-btn" class="primary-btn"><label for="search-input">Find a Teacher</label></a>
+                <a href="#secondary-btn" class="primary-btn"><label for="location-search-input">Find a Teacher</label></a>
                 <a href="signup.html" class="secondary-btn" >Become a Tutor</a>
             </div>
         </div>
     </section>
+
 
     <section class="teacher-list-section"></section>
 
@@ -116,10 +120,10 @@
             <h3>What Students Are Saying</h3>
             <div class="comment-form-container">
                 <form class="comment-form">
-                    <textarea name="comment-input" id="comment-input" rows="4" required placeholder="Write your comment"></textarea>
+                    <textarea name="comment-input" id="comment-input" required placeholder="Write your comment"></textarea>
                     <!-- <input type="text" id="commenter" placeholder="Enter name (Optional)"> -->
                     <br>
-                    <button type="submit" class="comment-btn" style="padding: 5px">Comment</button>
+                    <button type="submit" class="comment-btn" style="padding: 5px">Add comment</button>
                 </form>
             </div>
             <div class="comment-container">
@@ -131,7 +135,7 @@
     <section class="cta">
         <div class="container">
             <h3>Ready to start learning?</h3>
-            <a href="#search-input" class="primary-btn">Find Your Tutor Now</a>
+            <a href="#location-search-input" class="primary-btn">Find Your Tutor Now</a>
         </div>
     </section>
 
