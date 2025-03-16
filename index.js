@@ -200,7 +200,8 @@ locationSearchInput.addEventListener('input', function () {
         subjectSearchInput.disabled = true;
         subjectSearchInput.title = "Please enter location before searching subjects";
         subjectSearchInput.value = '';
-    } else {
+    }
+    else {
         subjectSearchInput.disabled = false;
         subjectSearchInput.title = ""; // Clear the tooltip when enabled
     }
