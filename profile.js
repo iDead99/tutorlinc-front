@@ -88,7 +88,7 @@ function getTeacher(){
             profileImage.src = "./images/logo.png";
         }
         else{
-            profileImage.src = `https://tutorlinc-ws.onrender.com${data.profile_picture}`;
+            profileImage.src = data.profile_picture;
         }
         
         if(data.bio === ''){
@@ -129,38 +129,55 @@ profilePictureInput.addEventListener('change', () => {
 });
 
 // Save the picture when "Save" is clicked
-saveButton.addEventListener('click', (event) => {
+saveButton.addEventListener('click', async (event) => {
     event.preventDefault();
 
     const file = profilePictureInput.files[0];
 
-    if (file) {
-        const formData = new FormData();
-        formData.append('profile_picture', file);
+    if (!file) {
+        alert('Please select an image before saving.');
+        return;
+    }
 
-        fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
+    // Validate file type (only images allowed)
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!validImageTypes.includes(file.type)) {
+        alert('Invalid file type. Please upload an image (JPG, PNG, GIF, or WEBP).');
+        profilePictureInput.value = ''; // Clear invalid input
+        return;
+    }
+
+    saveButton.disabled = true; // Prevent multiple clicks
+    saveButton.textContent = 'Saving...';
+
+    const formData = new FormData();
+    formData.append('profile_picture', file);
+
+    try {
+        const response = await fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
             method: 'PATCH',
             headers: {
                 'Authorization': `JWT ${accessToken}`
             },
             body: formData,
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    return response.json().then((error) => {
-                        throw new Error(error.detail || 'Failed to update profile picture');
-                    });
-                }
-                else{
-                    // profileImage.src = URL.createObjectURL(file); // Update the profile image
-                    // imagePreviewModal.style.display = 'none'; // Hide the modal
-                }
-                return response.json();
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert(error.message || 'An error occurred while updating the profile picture.');
-            });
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Failed to update profile picture.');
+        }
+
+        // Update the profile image only after a successful response
+        profileImage.src = URL.createObjectURL(file);
+        imagePreviewModal.style.display = 'none'; // Hide the modal
+        profilePictureInput.value = ''; // Clear input after successful upload
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert(error.message || 'An error occurred while updating the profile picture.');
+    } finally {
+        saveButton.disabled = false; // Re-enable button
+        saveButton.textContent = 'Save'; // Reset button text
     }
 });
 
@@ -169,3 +186,4 @@ cancelButton.addEventListener('click', () => {
     imagePreviewModal.style.display = 'none';
     profilePictureInput.value = ''; // Clear the file input
 });
+

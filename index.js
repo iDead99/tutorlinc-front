@@ -97,6 +97,8 @@ function displayTeacher(teacherData){
         }
         else{
             teacherImage.src = teachers.profile_picture;
+            console.log(teacherImage.src);
+            
         }
 
         const teacherName = document.createElement('span');
