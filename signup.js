@@ -34,9 +34,6 @@ const addressSpinner = document.getElementById('address-spinner');
 const verificationSpinner = document.getElementById('verification-spinner');
 
 const verificationSkip = document.getElementById('verification-skip');
-verificationSkip.addEventListener('click', function(){
-   document.getElementById('verification-form').style.display='block';
-})
 
 const skipContainer = document.getElementById("skip-container");
 const skipOkBtn = document.getElementById("skip-ok-btn");
@@ -44,6 +41,13 @@ const skipCancelBtn = document.getElementById("skip-cancel-btn");
 
 const registrationSucceedContainer = document.getElementById("registration-succeed-container");
 const registrationSucceedOkBtn = document.getElementById("registration-succeed-ok-btn");
+
+idCard.addEventListener('input', function(){
+   idCardError.textContent = '';
+})
+certificate.addEventListener('input', function(){
+   certificateError.textContent = '';
+})
 
 verificationSkip.addEventListener('click', function(){
    document.getElementById('verification-form').style.display='none';
@@ -285,66 +289,107 @@ function AddressRegistration(addressData){
 });
 }
 
-document.getElementById('verification-form').addEventListener('submit', (e) => {
-   e.preventDefault();
+// document.getElementById('verification-form').addEventListener('submit', function(e) {
+//    e.preventDefault();
 
-   const verificationData = {
-      id_card: idCard.files[0],
-      certificate: certificate.files[0],
-   };
+//    const verificationData = {
+//       id_card: idCard.files[0],
+//       certificate: certificate.files[0],
+//    };
 
-   verificationSpinner.style.display = 'block';
-   verificationBtn.disabled = true;
-   verificationBtn.style.opacity = '50%';
+//    verificationSpinner.style.display = 'block';
+//    verificationBtn.disabled = true;
+//    verificationBtn.style.opacity = '50%';
 
-   VerificationRegistration(verificationData);
-});
+//    VerificationRegistration(verificationData);
+   
+// });
 
-function VerificationRegistration(verificationData) {
-   const accessToken = localStorage.getItem('accessToken');
+// function VerificationRegistration(verificationData) {
+//    const accessToken = localStorage.getItem('accessToken');
+//    const formData = new FormData();
+//    formData.append('id_card', verificationData.id_card);
+//    formData.append('certificate', verificationData.certificate);
+
+//    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/verifications/', {
+//       method: 'POST',
+//       headers: {
+//          'Authorization': `JWT ${accessToken}`,
+//       },
+//       body: formData,
+//    })
+//    .then(response => {
+//       console.log('Verification response received', response); // Debugging log
+//       verificationSpinner.style.display = 'none';
+//       verificationBtn.disabled = false;
+//       verificationBtn.style.opacity = '100%';
+
+//       if(!response.ok){
+//          return response.json().then(error =>{
+//             console.log('Verification error', error); // Debugging log
+//             if (error.id_card && idCardError) {
+//                idCardError.textContent = error.id_card;
+//                window.location.href = '#id-card-error';
+//             }
+//             if (error.certificate && certificateError) {
+//                certificateError.textContent = error.certificate;
+//                window.location.href = '#certificate-error';
+//             }
+//          });
+//       }
+//       else{
+//          // console.log('Verification successful'); // Debugging log
+//          // skipContainer.style.display = 'none';
+//          // document.getElementById('personal-info-form').style.display = 'none';
+//          // document.getElementById('address-form').style.display = 'none';
+//          // document.getElementById('verification-form').style.display = 'none';
+//          // registrationSucceedContainer.style.display = 'block';
+        
+//          // localStorage.removeItem('accessToken');
+//       }
+//       return response.json();
+//    })
+//    .catch(error => {
+//       console.error('Verification registration failed', error); // Debugging log
+//       verificationSpinner.style.display = 'none';
+//       verificationBtn.disabled = false;
+//       verificationBtn.style.opacity = '100%';
+//    });
+// }
+
+document.getElementById('verification-form').addEventListener('submit', async (event) => {
+   event.preventDefault();
+   event.stopPropagation();
+
+   const idCardInput = idCard.files[0];
+   const certificateInput = certificate.files[0];
+
    const formData = new FormData();
-   formData.append('id_card', verificationData.id_card);
-   formData.append('certificate', verificationData.certificate);
+   formData.append('profile_picture', idCardInput);
+   // formData.append('certificate', certificateInput);
 
-   fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/verifications/', {
-      method: 'POST',
-      headers: {
-         'Authorization': `JWT ${accessToken}`,
-      },
-      body: formData,
-   })
-      .then(response => {
-         verificationSpinner.style.display = 'none';
-         verificationBtn.disabled = false;
-         verificationBtn.style.opacity = '100%';
+   const accessToken = localStorage.getItem('accessToken');
 
-         if(!response.ok){
-            return response.json().then(error =>{
-                  if (error.id_card && idCardError) {
-                     idCardError.textContent = error.id_card;
-                     window.location.href = '#id-card-error';
-                  }
-                  if (error.certificate && certificateError) {
-                     certificateError.textContent = error.certificate;
-                     window.location.href = '#certificate-error';
-                  }
-            });
-         }
-         else {
-            skipContainer.style.display = 'none';
-            document.getElementById('personal-info-form').style.display = 'none';
-            document.getElementById('address-form').style.display = 'none';
-            document.getElementById('verification-form').style.display = 'none';
-            registrationSucceedContainer.style.display = 'block';
+   try {
+       const response = await fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
+           method: 'PATCH',
+           headers: {
+               'Authorization': `JWT ${accessToken}`
+           },
+           body: formData,
+       });
 
-            localStorage.removeItem('accessToken');
-         }
-         return response.json();
-      })
-      .catch(error => {
-         verificationSpinner.style.display = 'none';
-         verificationBtn.disabled = false;
-         verificationBtn.style.opacity = '100%';
-         console.error(error, 'verification registration failed');
-      });
-}
+       if (!response.ok) {
+           const errorData = await response.json();
+           throw new Error(errorData.detail || 'Failed to update profile picture.');
+       }
+
+   } catch (error) {
+       console.error('Error:', error);
+       alert(error.message || 'An error occurred while uploading verification documents');
+   } finally {
+      //  saveButton.disabled = false; // Re-enable button
+      //  saveButton.textContent = 'Save'; // Reset button text
+   }
+   return false;
+});

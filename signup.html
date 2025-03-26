@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Signup-TutorLinc</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="signup.css">
@@ -18,8 +18,8 @@
     </div>
 
     <div class="form-container">
-        <form class="signup-form" id="personal-info-form" method="" style="display: block;">
-            <!-- *********************Personal info********************* -->
+        <!-- *********************Personal info********************* -->
+        <form class="signup-form" id="personal-info-form">
             <div class="form-group">
                 <label for="first-name">First name</label>
                 <input type="text" id="first-name" name="first-name" required>
@@ -83,7 +83,7 @@
         </form>
         
             <!-- *********************Address********************* -->
-        <form class="signup-form" method="" id="address-form"  style="display: none;">
+        <form class="signup-form" id="address-form"  style="display: none;">
             <div class="form-group">
                 <label style="text-align: center; color: black;">Address</label>
             </div>
@@ -130,7 +130,7 @@
         </form>
 
             <!-- *********************Verification********************* -->
-        <form class="signup-form" id="verification-form" method="" style="display: none;">
+        <form class="signup-form" id="verification-form" style="display: none;">
             <div class="verification-skip-container"><p id="verification-skip">Skip</p></div>
             <div class="form-group">
                 <label for="id-card">Your ID card ( 'jpg', 'jpeg', 'png', 'pdf' )</label>

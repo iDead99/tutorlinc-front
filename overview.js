@@ -2,6 +2,9 @@ const menuToggleContainer = document.querySelector('.menu-toggle-container');
 const menuToggle = document.querySelector('.menu-toggle');
 const sidebar = document.querySelector('.sidebar');
 
+const statusToggle = document.querySelector('.status-toggle');
+const statusText = document.querySelector('.status-text');
+
 const totalSubject = document.getElementById('total-subjects');
 const totalInquiry = document.getElementById('total-inquiries');
 
@@ -25,6 +28,7 @@ if (!accessToken) {
 
 document.addEventListener('DOMContentLoaded', function() {
     getTeacher();
+    getAvailabilityStatus();
 })
 
 function getTeacher(){
@@ -99,5 +103,83 @@ function getInquiry(id){
     })
     .catch(error => {
         alert(error);
+    })
+}
+
+statusToggle.addEventListener('click', function() {
+        if(statusText.textContent === 'Active'){
+            const availabilityStatusData={
+                availability_status: 'Inactive',
+                };
+                const response = confirm('If you toggle this off, you will appear inactive to students. Are you sure you want to proceed?')
+                if (response === true){
+                    updateAvailabilityStatus(availabilityStatusData);
+                }
+                else{
+                    return;
+                }
+        }
+        else if(statusText.textContent === 'Inactive'){
+            const availabilityStatusData={
+                availability_status: 'Active',
+                };
+            updateAvailabilityStatus(availabilityStatusData);
+        }
+})
+
+function getAvailabilityStatus(){
+    
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
+        headers: {
+            'Authorization': `JWT ${accessToken}`,
+            'Content-Type': 'application/json',          
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            throw new Error('network not ok!')
+        }
+        return response.json()
+    })
+    .then(data => {
+        document.querySelector('.status-container').style.display = 'flex';
+        statusText.textContent = data.availability_status;
+        if(statusText.textContent === 'Active'){
+            statusToggle.classList.remove('toggle-inactive');
+            statusToggle.classList.toggle('toggle-active')
+            statusText.style.color = 'green';
+        }
+        else{
+            statusToggle.classList.remove('toggle-active');
+            statusToggle.classList.toggle('toggle-inactive')
+            statusText.style.color = 'red';
+        }
+    })
+    .catch(error => {
+        alert(error)
+    })
+}
+
+function updateAvailabilityStatus(availabilityStatusData){
+
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `JWT ${accessToken}`,
+            'Content-Type': 'application/json',          
+        },
+        body: JSON.stringify(availabilityStatusData)
+    })
+    .then(response => {
+        if(!response.ok){
+            throw new Error('network not ok!')
+        }
+        else{
+            getAvailabilityStatus();
+        }
+        return response.json()
+    })
+    .catch(error => {
+        alert(error)
     })
 }

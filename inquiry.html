@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subject Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Inquiry Dashboard</title>
     <link rel="stylesheet" href="inquiry.css">
 </head>
 <body>
@@ -47,10 +47,14 @@
                     <tbody id="tbody"></tbody>
                 </table>
 
-                <div id="confirm-delete-inquiry" style="display: none;">
-                    <p id="confirm-delete-inquiry-text" style="display: inline-block;">Are you sure you want to delete this inquiry?</p> <br>
-                    <button style="color: white; background-color: red;" id="confirm-delete-inquiry-yes-btn">YES</button>
-                    <button style="color: white; background-color: green;" id="confirm-delete-inquiry-no-btn">NO</button>
+                <div class="delete-inquiry-modal" style="display: none;">
+                    <div class="delete-inquiry-modal-content">
+                        <h3>Are you sure you want to delete this inquiry?</h3>
+                            <div class="delete-inquiry-modal-actions">
+                                <button id="delete-inquiry-delete-btn">Delete</button>
+                                <button id="delete-inquiry-cancel-btn">Cancel</button>
+                            </div>
+                    </div>
                 </div>
 
             </section>

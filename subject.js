@@ -3,9 +3,10 @@ const menuToggle = document.querySelector('.menu-toggle');
 const sidebar = document.querySelector('.sidebar');
 
 const subjectTable = document.querySelector('.subjects-table');
-const confirmDeleteSubject = document.getElementById('confirm-delete-subject');
-const confirmDeleteSubjectYESbtn = document.getElementById('confirm-delete-subject-yes-btn');
-const confirmDeleteSubjectNObtn = document.getElementById('confirm-delete-subject-no-btn');
+
+const deleteSubjectModal = document.querySelector('.delete-subject-modal');
+const deleteSubjectDeleteBtn = document.getElementById('delete-subject-delete-btn');
+const deleteSubjectCancelBtn = document.getElementById('delete-subject-cancel-btn');
 
 menuToggle.addEventListener('click', () => {
     if(menuToggle.textContent === '☰'){
@@ -89,7 +90,8 @@ function deleteSubject(id){
             throw new Error ('Network was not ok!')
         }
         else{
-            window.location.href="subject.html";
+            deleteSubjectModal.style.display='none';
+            getTeacher();
         }
     })
     .catch(error => {
@@ -128,15 +130,13 @@ function displaySubject(subjectData){
         btnDelete.className='btn-delete';
         btnDelete.textContent='Delete';
         btnDelete.addEventListener('click', function() {
-            subjectTable.style.display='none';
-            document.querySelector('.add-subject-btn').style.display='none';
-            confirmDeleteSubject.style.display='block';
+            deleteSubjectModal.style.display='flex';
 
-            confirmDeleteSubjectYESbtn.onclick=function(){
+            deleteSubjectDeleteBtn.onclick=function(){
                 deleteSubject(item.id);
              }
-             confirmDeleteSubjectNObtn.onclick=function(){
-                window.location.href="subject.html";
+             deleteSubjectCancelBtn.onclick=function(){
+                deleteSubjectModal.style.display='none';
             }
         })
 

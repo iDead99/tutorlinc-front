@@ -5,6 +5,7 @@ body, html {
     color: #333;
     scroll-behavior: smooth;
     /* background-color: rgba(0, 0, 255, 0.082); */
+    animation: fadeIn 1s ease-out forwards;
 }
 
 h3 {
@@ -76,6 +77,10 @@ h3 {
 }
 
 /* Search Results Styling */
+.location-result-container, .subject-result-container{
+    padding: 0;
+    margin: 0;
+}
 .subject-search, .location-search {
     /* display: block; */
     list-style: none;
@@ -100,8 +105,7 @@ h3 {
 }
 
 .subject-search:hover {
-    background: #007bff;
-    color: white;
+    color: rgb(155, 155, 155);
 }
 
 /* No Results Message */
@@ -110,6 +114,13 @@ h3 {
     font-weight: bold;
     color: #ff3b30;
     padding: 12px;
+}
+
+.location-title, .subject-title{
+    background-color: lightgray;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
 }
 
 .primary-btn,
@@ -137,7 +148,7 @@ h3 {
 }
 .teacher-list-section{
     padding: 10px;
-    height: 20em;
+    max-height: 20em;
     overflow: auto;
     scrollbar-width: none;
     display: flex;

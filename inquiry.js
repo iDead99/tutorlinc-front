@@ -3,9 +3,10 @@ const menuToggle = document.querySelector('.menu-toggle');
 const sidebar = document.querySelector('.sidebar');
 
 const inquiryTable = document.querySelector('.inquiry-table');
-const confirmDeleteInquiry = document.getElementById('confirm-delete-inquiry');
-const confirmDeleteInquiryYESbtn = document.getElementById('confirm-delete-inquiry-yes-btn');
-const confirmDeleteInquiryNObtn = document.getElementById('confirm-delete-inquiry-no-btn');
+
+const deleteInquiryModal = document.querySelector('.delete-inquiry-modal');
+const deleteInquiryDeleteBtn = document.getElementById('delete-inquiry-delete-btn');
+const deleteInquiryCancelBtn = document.getElementById('delete-inquiry-cancel-btn');
 
 
 menuToggle.addEventListener('click', () => {
@@ -89,7 +90,8 @@ function deleteInquiry(id){
             throw new Error ('Network was not ok!')
         }
         else{
-            window.location.href="inquiry.html";
+            deleteInquiryModal.style.display='none';
+            getTeacher();
         }
     })
     .catch(error => {
@@ -127,14 +129,13 @@ function displayInquiry(inquiryData){
         btnDelete.className='btn-delete';
         btnDelete.textContent='Delete';
         btnDelete.addEventListener('click', function() {
-            inquiryTable.style.display='none';
-            confirmDeleteInquiry.style.display='block';
+            deleteInquiryModal.style.display='flex';
 
-            confirmDeleteInquiryYESbtn.onclick=function(){
+            deleteInquiryDeleteBtn.onclick=function(){
                 deleteInquiry(item.id);
              }
-             confirmDeleteInquiryNObtn.onclick=function(){
-                window.location.href="inquiry.html";
+             deleteInquiryCancelBtn.onclick=function(){
+                deleteInquiryModal.style.display='none';
             }
         })
 

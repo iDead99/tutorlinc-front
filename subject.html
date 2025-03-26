@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Subject Dashboard</title>
     <link rel="stylesheet" href="subject.css">
 </head>
@@ -47,11 +47,15 @@
                     <tbody id="tbody"></tbody>
                 </table>
 
-                <div id="confirm-delete-subject" style="display: none;">
-                    <p id="confirm-delete-subject-text" style="display: inline-block;">Are you sure you want to delete this subject?</p> <br>
-                    <button style="color: white; background-color: red;" id="confirm-delete-subject-yes-btn">YES</button>
-                    <button style="color: white; background-color: green;" id="confirm-delete-subject-no-btn">NO</button>
+    <div class="delete-subject-modal" style="display: none;">
+        <div class="delete-subject-modal-content">
+            <h3>Are you sure you want to delete this subject?</h3>
+                <div class="delete-subject-modal-actions">
+                    <button id="delete-subject-delete-btn">Delete</button>
+                    <button id="delete-subject-cancel-btn">Cancel</button>
                 </div>
+        </div>
+    </div>
 
             </section>
             <a href="add-subject.html" style="text-decoration: none;"><button class="add-subject-btn">Add New Subject</button></a>

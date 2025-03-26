@@ -26,7 +26,6 @@ message.addEventListener('input', () => {
     operationDone.style.display = 'none';
 })
 
-let teacherId;
 document.addEventListener('DOMContentLoaded', function() { 
     const params = new URLSearchParams(window.location.search);
     const teacherId = params.get('id');
@@ -98,6 +97,25 @@ function getTeacher(teacher_id){
                 }
             }
         })
+
+        document.querySelector('.modal-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+        
+            submitBtn.disabled=true;
+            if(submitBtn.disabled===true){
+             submitBtn.style.opacity='50%';
+            }
+            const inquiryData = {
+                student_name: fullName.value,
+                email: email.value,
+                phone: phone.value,
+                message: message.value,
+                teacher: data.id
+            }
+            sendInquiry(inquiryData);
+            
+        })
+
     })
     .catch(error => {
         alert(error)
@@ -170,32 +188,15 @@ function getAddress(teacher_id) {
     });
 }
 
-document.querySelector('.modal-form').addEventListener('submit', function(e) {
-    e.preventDefault();
 
-    submitBtn.disabled=true;
-    if(submitBtn.disabled===true){
-     submitBtn.style.opacity='50%';
-    }
-
-    sendInquiry();
-})
-
-function sendInquiry(){
-
+function sendInquiry(inquiryData){
     fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/inquiries/', {
 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            student_name: fullName.value,
-            email: email.value,
-            phone: phone.value,
-            message: message.value,
-            teacher: teacherId
-        })
+        body: JSON.stringify(inquiryData)
     })
     .then(response => {
         if(!response.ok){
@@ -208,6 +209,10 @@ function sendInquiry(){
             if (submitBtn.disabled === false) {
                 submitBtn.style.opacity = '100%';
             }
+            fullName.value = '';
+            email.value = '';
+            phone.value = '';
+            message.value = '';
         }
         return response.json();
     })

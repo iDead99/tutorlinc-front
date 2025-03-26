@@ -79,7 +79,6 @@ function displayTeacher(teacherData){
         const activationStatus = document.createElement('span');
         // activationStatus.className = 'activation-status';
         activationStatus.textContent = teachers.availability_status;
-        // console.log(activationStatus.textContent);
         if(activationStatus.textContent === 'Active'){
             activationStatus.classList.add('activation-status-active')
         }
@@ -97,8 +96,6 @@ function displayTeacher(teacherData){
         }
         else{
             teacherImage.src = teachers.profile_picture;
-            console.log(teacherImage.src);
-            
         }
 
         const teacherName = document.createElement('span');
@@ -191,21 +188,16 @@ let fetchedSubjects = []; // Store subjects for filtering
 let debounceTimer = null; // Timer for debouncing API requests
 
 locationSearchInput.addEventListener('input', function () {
-    if(locationSearchInput.value !== ''){
-        hidePrimarySecondaryBtn();
-    }
-    else{
-        showPrimarySecondaryBtn();
-    }
-
     if (locationSearchInput.value.trim() === '') {
         subjectSearchInput.disabled = true;
         subjectSearchInput.title = "Please enter location before searching subjects";
         subjectSearchInput.value = '';
+        showPrimarySecondaryBtn();
     }
     else {
         subjectSearchInput.disabled = false;
-        subjectSearchInput.title = ""; // Clear the tooltip when enabled
+        subjectSearchInput.title = "";
+        hidePrimarySecondaryBtn();
     }
 
     clearTimeout(debounceTimer);
@@ -214,7 +206,9 @@ locationSearchInput.addEventListener('input', function () {
     if (query === '') {
         locationResultContainer.innerHTML = '';
         subjectResultContainer.innerHTML = '';
-    } else {
+        document.querySelector('.location-title').style.display = 'none';
+    }
+    else {
         debounceTimer = setTimeout(() => searchLocation(query), 300); // Debounce API call
     }
 });
@@ -229,11 +223,15 @@ function searchLocation(locationQuery) {
     })
     .then(data => {
         locationResultContainer.innerHTML = '';
+        document.querySelector('.location-title').style.display = 'block';
         fetchedSubjects = [];
         let uniqueTeachers = new Set(); // Store unique teacher IDs to prevent duplicate fetches
 
         if (data.length === 0) {
-            locationResultContainer.innerHTML = '<b style="color: black;">No result found!</b>';
+            locationResultContainer.innerHTML = '<p style="color: black;">No result found!</p>';
+            if(subjectSearchInput.value !== ''){
+                subjectResultContainer.innerHTML = '<p style="color: black;">No result found!</p>';
+            }
             return;
         }
 
@@ -241,6 +239,7 @@ function searchLocation(locationQuery) {
             const locationSearchList = document.createElement('li');
             locationSearchList.className = 'location-search';
             locationSearchList.textContent = `${location.street} - ${location.town} - ${location.region}`;
+
             locationResultContainer.appendChild(locationSearchList);
 
             if (location.teacher && !uniqueTeachers.has(location.teacher)) {
@@ -271,9 +270,6 @@ subjectSearchInput.addEventListener('input', function () {
     if(subjectSearchInput.value !== ''){
         hidePrimarySecondaryBtn();
     }
-    else{
-        showPrimarySecondaryBtn();
-    }
 
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => filterSubjects(subjectSearchInput.value), 300);
@@ -284,6 +280,7 @@ function filterSubjects(query) {
     query = query.trim();
 
     if (query === '') {
+        document.querySelector('.subject-title').style.display = 'none';
         return;
     }
 
@@ -292,8 +289,11 @@ function filterSubjects(query) {
     );
 
     if (filteredSubjects.length === 0) {
-        subjectResultContainer.innerHTML = '<b style="color: black;">No result found!</b>';
-    } else {
+        document.querySelector('.subject-title').style.display = 'block';
+        subjectResultContainer.innerHTML = '<p style="color: black;">No result found!</p>';
+    }
+    else {
+        document.querySelector('.subject-title').style.display = 'block';
         filteredSubjects.forEach(subject => {
             const subjectSearchList = document.createElement('li');
             subjectSearchList.className = 'subject-search';

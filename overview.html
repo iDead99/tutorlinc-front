@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Overview Dashboard</title>
     <link rel="stylesheet" href="overview.css">
 </head>
@@ -33,6 +33,12 @@
 
             <header class="main-header">
                 <h1>Overview</h1>
+                <div class="status-container" style="display: none;">
+                    <div class="status-toggle-container">
+                        <div class="status-toggle"></div>
+                    </div>
+                    <span class="status-text"></span>
+                </div>
             </header>
 
             <section class="stats">

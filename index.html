@@ -20,7 +20,7 @@
                 <ul class="nav-links">
                     <li><a href="#">Home 🏠</a></li>
                     <li><a href="#how-it-works">How It Works ❓</a></li>
-                    <li><a href="#location-tfsearch-input">Find a Teacher 🔎</a></li>
+                    <li><a href="#location-search-input">Find a Teacher 🔎</a></li>
                     <li><a href="signup.html">Become a Tutor 📚</a></li>
                     <li><a href="#footer">Contact Us 📞</a></li>
                     <li><a href="signin.html" class="login-btn">Sign Up / Log In</a></li>                    
@@ -42,8 +42,15 @@
                 <input id="subject-search-input" type="text" placeholder="What do you want to learn?" disabled>
             </form>
 
-            <ul class="location-result-container"></ul>  <!-- New container for locations -->
-            <ul class="subject-result-container"></ul>  <!-- New container for subjects -->
+            <!-- New container for locations -->
+             <div class="location-result-overall-container">
+                <span class="location-title" style="display: none;">LOCATIONS</span>
+                <ul class="location-result-container"></ul>
+            </div>
+            <div class="subject-result-overall-container">
+                <span class="subject-title" style="display: none;">SUBJECTS</span>
+                <ul class="subject-result-container"></ul>
+            </div>
 
             <div class="cta-buttons">
                 <a href="#secondary-btn" class="primary-btn"><label for="location-search-input">Find a Teacher</label></a>

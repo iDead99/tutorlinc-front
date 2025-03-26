@@ -5,6 +5,15 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     display: flex;
+    animation: fadeIn 1s ease-out forwards;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 .menu-toggle-container{
     display: none;
