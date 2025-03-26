@@ -147,13 +147,14 @@ h3 {
     color: #333;
 }
 .teacher-list-section {
-    padding: 10px;
+    padding: 20px 10px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
     max-height: 30em;
     overflow-y: auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     scrollbar-width: none;
 }
 .teacher-container{
@@ -301,57 +302,155 @@ h3 {
 .popular-subjects,
 .comments,
 .cta {
-    padding: 20px 0;
+    padding: 20px 2%;
     margin: 20px 0;
 }
 
+/* Grid Layouts */
 .features-grid,
 .steps-grid,
 .subjects-grid {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 30px;
 }
 
+/* Feature & Steps */
 .feature,
-.step{
+.step {
     text-align: center;
-    padding: 20px;
-    flex: 1 1 150px;
+    padding: 30px;
+    flex: 1 1 250px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+/* Subject Cards */
 .subject-card {
-    /* background-color: #f4f4f4; */
-    border-radius: 10px;
-    margin: 10px;
-    /* padding: 10px; */
+    /* background: linear-gradient(135deg, #6e8efb, #a777e3); */
+    color: black;
+    border-radius: 15px;
+    margin: 5px;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 6px 15px rgba(110, 142, 251, 0.3);
+}
+
+
+/* Comments Section */
+.comments {
+    background: #ffffff;
+    padding: 50px 5%;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
 .comments .comment-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
     max-height: 25em;
     overflow-y: auto;
-    scrollbar-width: none;
+    padding: 15px;
+    gap: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(150, 150, 150, 0.3) transparent;
 }
 
-.comment {
-    background-color: #f9f9f9;
-    padding: 20px;
+/* Custom Scrollbar (For Webkit Browsers) */
+.comments .comment-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.comments .comment-container::-webkit-scrollbar-thumb {
+    background-color: rgba(150, 150, 150, 0.3);
     border-radius: 10px;
+}
+
+/* Individual Comment */
+.comment {
+    background: linear-gradient(135deg, #f7f8fc, #e8ebf3);
+    padding: 20px;
+    border-radius: 12px;
     margin: 10px;
     flex: 1 1 45%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.comment-form{
-    margin-left: 5px;
+.comment:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
-.comment-form input, textarea{
-    width: 60%;
-    padding: 5px;
-    margin-bottom: 5px;
+
+/* Comment Form */
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s ease-in-out;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+/* Submit Button */
+.comment-form button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.comment-form button:hover {
+    background: #357ab8;
+}
+
+/* CTA Section */
+.cta {
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cta .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.cta h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
 
 footer {
     background-color: #333;
@@ -374,16 +473,6 @@ footer {
     margin-right: 15px;
     color: white;
     text-decoration: none;
-}
-
-.btn-save {
-    color: white;
-    background: #2980b9;
-}
-
-.btn-cancel {
-    background: #2980b9;
-    color: white;
 }
 
 
