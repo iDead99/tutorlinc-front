@@ -184,7 +184,7 @@ function displayComment(commentData){
 }
 
 
-let fetchedSubjects = []; // Store subjects for filtering
+let fetchedSubjects = new Map(); // Store subjects uniquely by ID
 let debounceTimer = null; // Timer for debouncing API requests
 
 locationSearchInput.addEventListener('input', function () {
@@ -193,8 +193,7 @@ locationSearchInput.addEventListener('input', function () {
         subjectSearchInput.title = "Please enter location before searching subjects";
         subjectSearchInput.value = '';
         showPrimarySecondaryBtn();
-    }
-    else {
+    } else {
         subjectSearchInput.disabled = false;
         subjectSearchInput.title = "";
         hidePrimarySecondaryBtn();
@@ -207,8 +206,7 @@ locationSearchInput.addEventListener('input', function () {
         locationResultContainer.innerHTML = '';
         subjectResultContainer.innerHTML = '';
         document.querySelector('.location-title').style.display = 'none';
-    }
-    else {
+    } else {
         debounceTimer = setTimeout(() => searchLocation(query), 300); // Debounce API call
     }
 });
@@ -224,12 +222,12 @@ function searchLocation(locationQuery) {
     .then(data => {
         locationResultContainer.innerHTML = '';
         document.querySelector('.location-title').style.display = 'block';
-        fetchedSubjects = [];
-        let uniqueTeachers = new Set(); // Store unique teacher IDs to prevent duplicate fetches
+        fetchedSubjects.clear(); // Clear previous subjects
+        let uniqueTeachers = new Set(); // Ensure unique teacher IDs
 
         if (data.length === 0) {
             locationResultContainer.innerHTML = '<p style="color: black;">No result found!</p>';
-            if(subjectSearchInput.value !== ''){
+            if (subjectSearchInput.value !== '') {
                 subjectResultContainer.innerHTML = '<p style="color: black;">No result found!</p>';
             }
             return;
@@ -260,14 +258,18 @@ function searchSubject(teacherId) {
         return response.json();
     })
     .then(data => {
-        fetchedSubjects = fetchedSubjects.concat(data); // Store subjects for filtering
-        filterSubjects(subjectSearchInput.value); // Apply existing subject filter
+        data.forEach(subject => {
+            if (!fetchedSubjects.has(subject.id)) { // Ensure uniqueness
+                fetchedSubjects.set(subject.id, subject);
+            }
+        });
+        filterSubjects(subjectSearchInput.value); // Apply subject filter
     })
     .catch(error => alert(error));
 }
 
 subjectSearchInput.addEventListener('input', function () {
-    if(subjectSearchInput.value !== ''){
+    if (subjectSearchInput.value !== '') {
         hidePrimarySecondaryBtn();
     }
 
@@ -284,15 +286,14 @@ function filterSubjects(query) {
         return;
     }
 
-    const filteredSubjects = fetchedSubjects.filter(subject =>
+    const filteredSubjects = Array.from(fetchedSubjects.values()).filter(subject =>
         subject.name.toLowerCase().includes(query.toLowerCase())
     );
 
     if (filteredSubjects.length === 0) {
         document.querySelector('.subject-title').style.display = 'block';
         subjectResultContainer.innerHTML = '<p style="color: black;">No result found!</p>';
-    }
-    else {
+    } else {
         document.querySelector('.subject-title').style.display = 'block';
         filteredSubjects.forEach(subject => {
             const subjectSearchList = document.createElement('li');

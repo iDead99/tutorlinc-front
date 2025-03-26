@@ -146,17 +146,15 @@ h3 {
     background-color: #FFC107;
     color: #333;
 }
-.teacher-list-section{
+.teacher-list-section {
     padding: 10px;
-    max-height: 20em;
-    overflow: auto;
-    scrollbar-width: none;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
     gap: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    max-height: 30em;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 .teacher-container{
     display: flex;
@@ -164,50 +162,52 @@ h3 {
     align-items: center;
     flex-direction: column;
     padding: 10px;
-    gap: 10px;
     width: 20%;
-    background-color: rgb(245, 245, 245);
-    box-shadow: 0 2px 4px 3px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.teacher-container:hover{
-    transform: scale(1.05, 1.05);
-    box-shadow: 0 2px 3px #007bffad;
+.teacher-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
 }
 .status-container{
     display: flex;
     justify-content: right;
     width: 100%;
 }
-.activation-status-active{
-    font-weight: bold;
-    background-color: rgb(192, 253, 192);
-    box-shadow: 0px 0px 20px 0px rgb(200, 255, 200);
+.activation-status-active {
+    background: #d4edda;
     color: green;
+    padding: 5px;
     border-radius: 5px;
-    padding: 2px;
+    font-size: 14px;
 }
-.activation-status-inactive{
-    font-weight: bold;
+
+.activation-status-inactive {
+    background: #f8d7da;
     color: red;
+    padding: 5px;
     border-radius: 5px;
-    padding: 2px;
+    font-size: 14px;
 }
 .Verification-status{
     border: 2px solid black;
 }
-.teacher-image{
-    width: 8em;
-    height: 8em;
+.teacher-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     object-fit: cover;
-    border-radius: 100%;
+    margin-bottom: 10px;
 }
 .teacher-name{
     font-size: 18px;
     padding: 2px;
-    border-radius: 5px;
     text-align: center;
 }
+
 
 /* Hero Animation Styles */
 @keyframes slideInDown {
