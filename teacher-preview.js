@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function getTeacher(teacher_id){
-    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/${teacher_id}/`, {
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/teachers/${teacher_id}/`, {
         headers: {
             'Content-Type': 'application/json',          
         }
@@ -71,8 +71,16 @@ function getTeacher(teacher_id){
 
         teacherImageContainer.appendChild(teacherImage);
 
+        let teacherGender = '';
+        if(data.gender === 'Female'){
+            teacherGender = 'Madam';
+        }
+        else{
+            teacherGender = 'Sir';
+        }
+
         const teacherName = document.getElementById('teacher-name');
-        teacherName.textContent = `${data.user.first_name} ${data.user.last_name}`;
+        teacherName.textContent = `${teacherGender} ${data.user.first_name} ${data.user.last_name}`;
 
         if(data.availability_status === 'Active'){
             teacherStatusMessage.innerHTML = `This teacher is <b>${data.availability_status}<b>✅`;
@@ -123,7 +131,7 @@ function getTeacher(teacher_id){
 }
 
 function getSubjects(teacher_id) {
-    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/subjects/?teacher__id=${teacher_id}`, {
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/?teacher__id=${teacher_id}`, {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -156,7 +164,7 @@ function getSubjects(teacher_id) {
 }
 
 function getAddress(teacher_id) {
-    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/addresses/?teacher__id=${teacher_id}`, {
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/addresses/?teacher__id=${teacher_id}`, {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -190,7 +198,7 @@ function getAddress(teacher_id) {
 
 
 function sendInquiry(inquiryData){
-    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/inquiries/', {
+    fetch('http://127.0.0.1:8000/manage_tutorlinc/inquiries/', {
 
         method: 'POST',
         headers: {

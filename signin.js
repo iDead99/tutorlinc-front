@@ -3,27 +3,26 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 
 const spinner = document.querySelector('.spinner');
-
 const userPassError = document.getElementById('user-pass-error');
 
-email.addEventListener('input', ()=> {
-    userPassError.textContent='';
-})
-password.addEventListener('input', ()=> {
-    userPassError.textContent='';
-})
+email.addEventListener('input', () => {
+    userPassError.textContent = '';
+});
+password.addEventListener('input', () => {
+    userPassError.textContent = '';
+});
 
-document.querySelector('.login-form').addEventListener('submit', function(e) {
-    e.preventDefault()
-    login()
-    spinner.style.display='block';
-    submitBtn.disabled=true;
-    if(submitBtn.disabled===true){
-        submitBtn.style.opacity='50%';
-    }
-})
+document.querySelector('.login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    userPassError.textContent = ''; // Clear previous errors
+    spinner.style.display = 'block';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '50%';
 
-function login(){
+    login();
+});
+
+function login() {
     fetch('https://tutorlinc-ws.onrender.com/auth/jwt/create', {
         method: 'POST',
         headers: {
@@ -35,30 +34,29 @@ function login(){
         })
     })
     .then(response => {
-        if(!response.ok){
+        if (!response.ok) {
             return response.json().then(error => {
-                userPassError.textContent=error.detail;
-                spinner.style.display='none';
-                submitBtn.disabled=false;
-                if(submitBtn.disabled===false){
-                    submitBtn.style.opacity='100%';
-                }
-            })
+                throw new Error(error.detail || 'Invalid credentials');
+            });
         }
-        else{
-            spinner.style.display='none';
-            submitBtn.disabled=false;
-            if(submitBtn.disabled===false){
-                submitBtn.style.opacity='100%';
-            }
-            window.location.href="overview.html";
-        }
-        return response.json()
+        return response.json();
     })
     .then(data => {
-        localStorage.setItem('accessToken', data.access)
+        localStorage.setItem('accessToken', data.access);
+        window.location.href = "overview.html";
     })
     .catch(error => {
-        return error;
+        // Display a meaningful error message
+        if (error.message === 'Failed to fetch') {
+            userPassError.textContent = "Network error! Please check your internet connection.";
+        } else {
+            userPassError.textContent = error.message;
+        }
     })
+    .finally(() => {
+        // Ensure UI resets regardless of success or failure
+        spinner.style.display = 'none';
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '100%';
+    });
 }
