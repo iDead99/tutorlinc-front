@@ -40,14 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function getTeacher(){
-    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/', {
+    fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/', {
         headers: {
             'Content-Type': 'application/json'
         },
     })
     .then(response => {
         if(!response.ok){
-            throw new Error('Network was not ok');
+            throw new Error(response.error);
         }
         return response.json();
     })
@@ -55,7 +55,12 @@ function getTeacher(){
         displayTeacher(data);        
     })
     .catch(error => {
-        alert(error);
+        // Display a meaningful error message
+        if (error.message === 'Failed to fetch') {
+            alert("Network error! Please check your internet connection.");
+        } else {
+            alert(error.message);
+        }
     })
 }
 
@@ -130,7 +135,7 @@ document.querySelector('.comment-form').addEventListener('submit', function(e) {
 })
 
 function addComment(){
-    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/comments/', {
+    fetch('http://127.0.0.1:8000/manage_tutorlinc/comments/', {
 
         method: 'POST',
         headers: {
@@ -146,28 +151,36 @@ function addComment(){
         }
         else{
             getComment();
-            submitBtn.disabled = false;
-            if (submitBtn.disabled === false) {
-                submitBtn.style.opacity = '100%';
-                submitBtn.textContent = 'Add comment';
-            }
             commentInput.value = '';
         }
     })
     .catch(error => {
-        alert(error);
+        // Display a meaningful error message
+        if (error.message === 'Failed to fetch') {
+            alert("Network error! Please check your internet connection.");
+        } else {
+            alert(error.message);
+        }
     })
+    .finally(() => {
+        submitBtn.disabled = false;
+        if (submitBtn.disabled === false) {
+            submitBtn.style.opacity = '100%';
+            submitBtn.textContent = 'Add comment';
+        }
+        commentInput.value = '';
+    });
 }
 
 function getComment(){
-    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/comments/', {
+    fetch('http://127.0.0.1:8000/manage_tutorlinc/comments/', {
         headers: {
             'Content-Type': 'application/json'
         },
     })
     .then(response => {
         if(!response.ok){
-            throw new Error('Network was not ok');
+            throw new Error(response.error);
         }
         return response.json();
     })
@@ -175,7 +188,12 @@ function getComment(){
         displayComment(data);
     })
     .catch(error => {
-        alert(error);
+        // Display a meaningful error message
+        if (error.message === 'Failed to fetch') {
+            alert("Network error! Please check your internet connection.");
+        } else {
+            alert(error.message);
+        }
     })
 }
 
@@ -222,11 +240,11 @@ locationSearchInput.addEventListener('input', function () {
 });
 
 function searchLocation(locationQuery) {
-    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/addresses/?search=${locationQuery}`, {
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/addresses/?search=${locationQuery}`, {
         headers: { 'Content-Type': 'application/json' },
     })
     .then(response => {
-        if (!response.ok) throw new Error('Network was not ok');
+        if (!response.ok) throw new Error(response.error);
         return response.json();
     })
     .then(data => {
@@ -256,15 +274,22 @@ function searchLocation(locationQuery) {
             }
         });
     })
-    .catch(error => alert(error));
+    .catch(error => {
+        // Display a meaningful error message
+        if (error.message === 'Failed to fetch') {
+            alert("Network error! Please check your internet connection.");
+        } else {
+            alert(error.message);
+        }
+    })
 }
 
 function searchSubject(teacherId) {
-    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/subjects/?teacher__id=${teacherId}`, {
+    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/?teacher__id=${teacherId}`, {
         headers: { 'Content-Type': 'application/json' },
     })
     .then(response => {
-        if (!response.ok) throw new Error('Network was not ok');
+        if (!response.ok) throw new Error(response.error);
         return response.json();
     })
     .then(data => {
@@ -275,7 +300,14 @@ function searchSubject(teacherId) {
         });
         filterSubjects(subjectSearchInput.value); // Apply subject filter
     })
-    .catch(error => alert(error));
+    .catch(error => {
+        // Display a meaningful error message
+        if (error.message === 'Failed to fetch') {
+            alert("Network error! Please check your internet connection.");
+        } else {
+            alert(error.message);
+        }
+    })
 }
 
 subjectSearchInput.addEventListener('input', function () {
