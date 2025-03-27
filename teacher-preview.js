@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function getTeacher(teacher_id){
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/teachers/${teacher_id}/`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/${teacher_id}/`, {
         headers: {
             'Content-Type': 'application/json',          
         }
@@ -131,7 +131,7 @@ function getTeacher(teacher_id){
 }
 
 function getSubjects(teacher_id) {
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/?teacher__id=${teacher_id}`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/subjects/?teacher__id=${teacher_id}`, {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -164,7 +164,7 @@ function getSubjects(teacher_id) {
 }
 
 function getAddress(teacher_id) {
-    fetch(`http://127.0.0.1:8000/manage_tutorlinc/addresses/?teacher__id=${teacher_id}`, {
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/addresses/?teacher__id=${teacher_id}`, {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -198,7 +198,7 @@ function getAddress(teacher_id) {
 
 
 function sendInquiry(inquiryData){
-    fetch('http://127.0.0.1:8000/manage_tutorlinc/inquiries/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/inquiries/', {
 
         method: 'POST',
         headers: {
