@@ -116,6 +116,7 @@ document.querySelector('.comment-form').addEventListener('submit', function(e) {
     submitBtn.disabled=true;
     if(submitBtn.disabled===true){
      submitBtn.style.opacity='50%';
+     submitBtn.textContent = 'Adding...';
     }
 
     addComment();
@@ -141,6 +142,7 @@ function addComment(){
             submitBtn.disabled = false;
             if (submitBtn.disabled === false) {
                 submitBtn.style.opacity = '100%';
+                submitBtn.textContent = 'Add comment';
             }
             commentInput.value = '';
         }
@@ -189,6 +191,8 @@ let debounceTimer = null; // Timer for debouncing API requests
 
 locationSearchInput.addEventListener('input', function () {
     if (locationSearchInput.value.trim() === '') {
+        document.querySelector('.location-title').style.display = 'none';
+        document.querySelector('.subject-title').style.display = 'none';
         subjectSearchInput.disabled = true;
         subjectSearchInput.title = "Please enter location before searching subjects";
         subjectSearchInput.value = '';
@@ -205,7 +209,6 @@ locationSearchInput.addEventListener('input', function () {
     if (query === '') {
         locationResultContainer.innerHTML = '';
         subjectResultContainer.innerHTML = '';
-        document.querySelector('.location-title').style.display = 'none';
     } else {
         debounceTimer = setTimeout(() => searchLocation(query), 300); // Debounce API call
     }
