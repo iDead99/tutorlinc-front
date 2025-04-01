@@ -19,7 +19,7 @@
 
     <div class="form-container">
         <!-- *********************Personal info********************* -->
-        <form class="signup-form" id="personal-info-form">
+        <form class="signup-form" id="personal-info-form" style="display: block;">
             <div class="form-group">
                 <label for="first-name">First name</label>
                 <input type="text" id="first-name" name="first-name" required>
@@ -50,6 +50,14 @@
             <div class="form-group">
                 <label for="phone">Phone number</label>
                 <input type="tel" id="phone" name="phone" minlength="10" maxlength="10" required >
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender">
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
             </div>
             
             <div class="form-group">
@@ -130,8 +138,14 @@
         </form>
 
             <!-- *********************Verification********************* -->
-        <form class="signup-form" id="verification-form" style="display: none;">
+        <form class="signup-form" id="verification-form" style="display: none; text-align: center;">
+
+            <div style="background-color: rgb(243, 243, 243); padding: 10px; box-shadow: 0px 0px 20px 0px rgb(243, 243, 243); border-radius: 10px;">
+                <p style="display: inline-block; color: black;"><big>ID Card, Certificate</big> <br> Upload these documents to verify your identity</p> <br>
+            </div>
+
             <div class="verification-skip-container"><p id="verification-skip">Skip</p></div>
+
             <div class="form-group">
                 <label for="id-card">Your ID card ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
                 <span id="id-card-error" style="color: red;"></span>

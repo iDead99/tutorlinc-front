@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
     getComment()
 })
 
-function getTeacher(){
-    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/', {
+function getTeacher(id){
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/`, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -349,6 +349,8 @@ function filterSubjects(query) {
             });
 
             subjectResultContainer.appendChild(subjectSearchList);
+
         });
+
     }
 }

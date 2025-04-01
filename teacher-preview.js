@@ -150,13 +150,23 @@ function getSubjects(teacher_id) {
         teacherSubjectTitle.className = 'teacher-subject-title';
         teacherSubjectContainer.appendChild(teacherSubjectTitle);
 
+        let subjectCount=0;
+
         data.forEach(subjects => {
+            subjectCount++;
+
             const teacherSubjectList = document.createElement('li');
             teacherSubjectList.className = 'teacher-subject';
+            teacherSubjectList.innerHTML = '<p style="color: black;">No result found!</p>'
             teacherSubjectList.textContent = `${subjects.name} - GHS${subjects.price}`;
             teacherSubjectContainer.appendChild(teacherSubjectList);
         })
         teacherAdditionalDataContainer.appendChild(teacherSubjectContainer);
+
+        if(subjectCount === 0){
+            teacherSubjectContainer.innerHTML = '<p style="color: black;">No subject added</p>';
+        }
+
     })
     .catch(error => {
         alert(error);
