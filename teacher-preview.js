@@ -78,7 +78,6 @@ function getTeacher(teacher_id){
         else{
             teacherGender = 'Sir';
         }
-
         const teacherName = document.getElementById('teacher-name');
         teacherName.textContent = `${teacherGender} ${data.user.first_name} ${data.user.last_name}`;
 
@@ -89,7 +88,7 @@ function getTeacher(teacher_id){
             teacherStatusMessage.innerHTML = `This teacher is <b>${data.availability_status}<b>❌`;
         }
 
-        teacherAvailabilityStatus = data.availability_status;
+        document.querySelector('.inquiry-btn-container').style.display = 'flex';
 
         inquiryBtn.addEventListener('click', function() {
             if(data.availability_status === 'Active'){
