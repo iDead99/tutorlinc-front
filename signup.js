@@ -321,44 +321,40 @@ function VerificationRegistration(verificationData) {
       },
       body: formData,
    })
+   .then(response => {
+      verificationSpinner.style.display = 'none';
+      verificationBtn.disabled = false;
+      verificationBtn.style.opacity = '100%';
+
+      if(!response.ok){
+         return response.json().then(error =>{
+            console.log('Verification error', error); // Debugging log
+            if (error.id_card && idCardError) {
+               idCardError.textContent = error.id_card;
+               window.location.href = '#id-card-error';
+            }
+            if (error.certificate && certificateError) {
+               certificateError.textContent = error.certificate;
+               window.location.href = '#certificate-error';
+            }
+         });
+      }
+      else{
+         console.log('Verification successful'); // Debugging log
+         skipContainer.style.display = 'none';
+         document.getElementById('personal-info-form').style.display = 'none';
+         document.getElementById('address-form').style.display = 'none';
+         document.getElementById('verification-form').style.display = 'none';
+         registrationSucceedContainer.style.display = 'block';
+      
+         localStorage.removeItem('accessToken');
+      }
+      return response.json();
+   })
+   .catch(error => {
+      console.error('Verification registration failed', error); // Debugging log
+      verificationSpinner.style.display = 'none';
+      verificationBtn.disabled = false;
+      verificationBtn.style.opacity = '100%';
+   })
 }
-
-
-
-
-// .then(response => {
-//    verificationSpinner.style.display = 'none';
-//    verificationBtn.disabled = false;
-//    verificationBtn.style.opacity = '100%';
-
-//    if(!response.ok){
-//       return response.json().then(error =>{
-//          console.log('Verification error', error); // Debugging log
-//          if (error.id_card && idCardError) {
-//             idCardError.textContent = error.id_card;
-//             window.location.href = '#id-card-error';
-//          }
-//          if (error.certificate && certificateError) {
-//             certificateError.textContent = error.certificate;
-//             window.location.href = '#certificate-error';
-//          }
-//       });
-//    }
-//    else{
-//       console.log('Verification successful'); // Debugging log
-//       skipContainer.style.display = 'none';
-//       document.getElementById('personal-info-form').style.display = 'none';
-//       document.getElementById('address-form').style.display = 'none';
-//       document.getElementById('verification-form').style.display = 'none';
-//       registrationSucceedContainer.style.display = 'block';
-     
-//       localStorage.removeItem('accessToken');
-//    }
-//    return response.json();
-// })
-// .catch(error => {
-//    console.error('Verification registration failed', error); // Debugging log
-//    verificationSpinner.style.display = 'none';
-//    verificationBtn.disabled = false;
-//    verificationBtn.style.opacity = '100%';
-// });
