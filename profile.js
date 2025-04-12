@@ -2,20 +2,30 @@ const menuToggleContainer = document.querySelector('.menu-toggle-container');
 const menuToggle = document.querySelector('.menu-toggle');
 const sidebar = document.querySelector('.sidebar');
 
-const firstName = document.getElementById('first-name');
-const lastName = document.getElementById('last-name');
+const fullName = document.getElementById('full-name');
 const email = document.getElementById('email');
 
 const phone = document.getElementById('phone');
 const qualification = document.getElementById('qualification');
 const bio = document.getElementById('bio');
-// const profilePicture = document.getElementById('profile-picture');
 
-// const profileImage = document.querySelector('.profile-image');
+const region = document.getElementById('region');
+const town = document.getElementById('town');
+const street = document.getElementById('street');
+
 const profileName = document.getElementById('profile-name');
 
-// const profilePictureInput = document.getElementById('profile-image-input');
 const profileButton = document.getElementById('upload-button');
+
+const editProfileBtn = document.querySelector('.edit-profile-btn');
+const editAddressBtn = document.querySelector('.edit-address-btn');
+
+editProfileBtn.addEventListener('click', () => {
+    window.location.href = 'edit-profile.html'
+})
+editAddressBtn.addEventListener('click', () => {
+    window.location.href = 'address.html'
+})
 
 menuToggle.addEventListener('click', () => {
     if(menuToggle.textContent === '☰'){
@@ -55,14 +65,13 @@ function getUser(){
         return response.json()
     })
     .then(data => {
-        firstName.value = data.first_name;
-        lastName.value = data.last_name;
-        email.value = data.email;
+        fullName.textContent = `${data.first_name} ${data.last_name}`;
+        email.textContent = data.email;
 
-        profileName.textContent = `${firstName.value} ${lastName.value}`
+        profileName.textContent = `${data.first_name} ${data.last_name}`
     })
     .catch(error => {
-        alert(error)
+        console.log(error)
     })
 }
 
@@ -81,8 +90,12 @@ function getTeacher(){
         return response.json()
     })
     .then(data => {
-        phone.value = data.phone;
-        qualification.value = data.highest_qualification;
+
+        getAddress(data.id);
+
+        gender.textContent = data.gender;
+        phone.textContent = data.phone;
+        qualification.textContent = data.highest_qualification;
 
         if(data.profile_picture === null){
             profileImage.src = "./images/logo.png";
@@ -92,14 +105,39 @@ function getTeacher(){
         }
         
         if(data.bio === ''){
-            bio.value = 'No bio';
+            bio.textContent = 'No bio';
         }
         else{
-            bio.value = data.bio;
+            bio.textContent = data.bio;
         }
     })
     .catch(error => {
-        // alert(error)
+        console.log(error)
+    })
+}
+
+function getAddress(id){
+    fetch(`https://tutorlinc-ws.onrender.com/manage_tutorlinc/addresses/?teacher__id=${id}`, {
+        headers: {
+            'Authorization': `JWT ${accessToken}`,
+            'Content-Type': 'application/json',          
+        }
+    })
+    .then(response => {
+        if(!response.ok){
+            throw new Error('network not ok!')
+        }
+        return response.json()
+    })
+    .then(data => {
+        data.forEach(items => {
+            region.textContent = items.region;
+            town.textContent = items.town;
+            street.textContent = items.street;
+        })
+    })
+    .catch(error => {
+        console.log(error)
     })
 }
 
@@ -116,79 +154,6 @@ const cancelButton = document.getElementById('cancel-button');
 uploadButton.addEventListener('click', () => {
     profilePictureInput.click();
 });
-
-// Show preview when file is selected
-// profilePictureInput.addEventListener('change', () => {
-//     const profileImageFile = profilePictureInput.files[0];
-
-//     if (profileImageFile) {
-//         // Show the modal with the image preview
-//         imagePreview.src = URL.createObjectURL(profileImageFile); // Display the image preview
-//         imagePreviewModal.style.display = 'flex';
-//     }
-// });
-
-// Save the picture when "Save" is clicked
-// saveButton.addEventListener('click', async (event) => {
-//     event.preventDefault();
-
-//     const file = profilePictureInput.files[0];
-
-//     if (!file) {
-//         alert('Please select an image before saving.');
-//         return;
-//     }
-
-//     // Validate file type (only images allowed)
-//     const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-//     if (!validImageTypes.includes(file.type)) {
-//         alert('Invalid file type. Please upload an image (JPG, PNG, GIF, or WEBP).');
-//         profilePictureInput.value = ''; // Clear invalid input
-//         return;
-//     }
-
-//     saveButton.disabled = true; // Prevent multiple clicks
-//     saveButton.textContent = 'Saving...';
-
-//     const formData = new FormData();
-//     formData.append('profile_picture', file);
-
-//     try {
-//         const response = await fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
-//             method: 'PATCH',
-//             headers: {
-//                 'Authorization': `JWT ${accessToken}`
-//             },
-//             body: formData,
-//         });
-
-//         if (!response.ok) {
-//             const errorData = await response.json();
-//             throw new Error(errorData.detail || 'Failed to update profile picture.');
-//         }
-
-//         // Update the profile image only after a successful response
-//         profileImage.src = URL.createObjectURL(file);
-//         imagePreviewModal.style.display = 'none'; // Hide the modal
-//         profilePictureInput.value = ''; // Clear input after successful upload
-
-//     } catch (error) {
-//         console.error('Error:', error);
-//         alert(error.message || 'An error occurred while updating the profile picture.');
-//     } finally {
-//         saveButton.disabled = false; // Re-enable button
-//         saveButton.textContent = 'Save'; // Reset button text
-//     }
-// });
-
-// // Close the modal without saving when "Cancel" is clicked
-// cancelButton.addEventListener('click', () => {
-//     imagePreviewModal.style.display = 'none';
-//     profilePictureInput.value = ''; // Clear the file input
-// });
-
-
-
 
 profilePictureInput.addEventListener('change', () => {
     const profileImageFile = profilePictureInput.files[0];
