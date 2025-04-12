@@ -73,7 +73,7 @@ teacherInfoForm.addEventListener('submit', (e) => {
 
 function createTeacher(teacherData){    
 
-    fetch('https://tutorlinc-ws.onrender.com//manage_tutorlinc/teachers/me/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
     method: 'PUT',
     headers: {
        'Authorization': `JWT ${accessToken}`,
@@ -125,7 +125,7 @@ function createTeacher(teacherData){
  
  function createAddress(addressData){
 
-    fetch('https://tutorlinc-ws.onrender.com//manage_tutorlinc/addresses/', {
+    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/addresses/', {
     method: 'POST',
     headers: {
        'Authorization': `JWT ${accessToken}`,
