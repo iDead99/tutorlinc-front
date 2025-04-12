@@ -36,24 +36,28 @@
                 <h1>Profile Information</h1>
             </header>
             
+
             <div class="profile-photo">
                 <span id="profile-name"></span>
-                <img src="" alt="Profile Photo" class="profile-image">
-                <input type="file" id="profile-image-input" style="display: none;">
+                <img src="" alt="Profile Photo" class="profile-image" id="profile-image">
+                <input type="file" id="profile-image-input" accept="image/*" style="display: none;">
                 <button id="upload-button">Edit</button>
             </div>
-
+            
+            <input type="hidden" id="profileImageUrl" name="profile_picture">
+            
             <!-- Modal for Image Preview -->
-        <div id="image-preview-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <h3>Preview Profile Picture</h3>
-                <img id="image-preview" src="" alt="Image Preview" class="preview-image">
-                <div class="modal-actions">
-                    <button id="save-button" class="btn-save">Save</button>
-                    <button id="cancel-button" class="btn-cancel">Cancel</button>
+            <div id="image-preview-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3>Preview Profile Picture</h3>
+                    <img id="image-preview" src="" alt="Image Preview" class="preview-image">
+                    <div class="modal-actions">
+                        <button id="save-button" class="btn-save">Save</button>
+                        <button id="cancel-button" class="btn-cancel">Cancel</button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div>            
+
 
             <div class="location-link">
                 <a href="address.html" style="text-decoration: none; border-radius: 3px; color: black; padding: 0 5px; box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.281);">Location</a>

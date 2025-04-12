@@ -8,13 +8,8 @@ const statusText = document.querySelector('.status-text');
 const totalSubject = document.getElementById('total-subjects');
 const totalInquiry = document.getElementById('total-inquiries');
 
-const verifyEmailModal = document.getElementById('verify-email-modal');
-const verifyEmailButton = document.querySelector('.verify-email-button');
-
 const addNewSubjectModal = document.getElementById('add-new-subject-modal');
 const quitAddSubjectBtn = document.querySelector('.quit-add-subject-btn');
-
-let isVerifyEmailModal =false;
 
 menuToggle.addEventListener('click', () => {
     if(menuToggle.textContent === '☰'){
@@ -31,7 +26,7 @@ menuToggle.addEventListener('click', () => {
 const accessToken = localStorage.getItem('accessToken');
 
 if (!accessToken) {
-    window.location.href = "signin.html";
+    window.location.href = "login.html";
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -57,23 +52,6 @@ function getTeacher(){
 
         getSubject(data.id);
         getInquiry(data.id)
-
-        if(data.user.is_verified === false){
-            verifyEmailModal.style.display = 'flex';
-            isVerifyEmailModal = true;
-        }
-        else if(data.user.is_verified === true){
-            verifyEmailModal.style.display = 'none';
-        }
-        else{
-            window.location.href = 'signin.html';
-        }
-
-        verifyEmailButton.addEventListener('click', function() {
-            if (data.user.id) {
-                window.location.href = `verify-email.html?id=${data.user.id}`;
-            }
-        })
 
     })
     .catch(error => {
@@ -101,7 +79,7 @@ function getSubject(id){
             subjectNumber++;
         })
         totalSubject.textContent=subjectNumber;
-        if(subjectNumber === 0 && !isVerifyEmailModal){
+        if(subjectNumber === 0){
             addNewSubjectModal.style.display = 'flex';
 
             quitAddSubjectBtn.addEventListener('click', function() {

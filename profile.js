@@ -118,17 +118,87 @@ uploadButton.addEventListener('click', () => {
 });
 
 // Show preview when file is selected
-profilePictureInput.addEventListener('change', () => {
-    const file = profilePictureInput.files[0];
+// profilePictureInput.addEventListener('change', () => {
+//     const profileImageFile = profilePictureInput.files[0];
 
-    if (file) {
-        // Show the modal with the image preview
-        imagePreview.src = URL.createObjectURL(file); // Display the image preview
+//     if (profileImageFile) {
+//         // Show the modal with the image preview
+//         imagePreview.src = URL.createObjectURL(profileImageFile); // Display the image preview
+//         imagePreviewModal.style.display = 'flex';
+//     }
+// });
+
+// Save the picture when "Save" is clicked
+// saveButton.addEventListener('click', async (event) => {
+//     event.preventDefault();
+
+//     const file = profilePictureInput.files[0];
+
+//     if (!file) {
+//         alert('Please select an image before saving.');
+//         return;
+//     }
+
+//     // Validate file type (only images allowed)
+//     const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+//     if (!validImageTypes.includes(file.type)) {
+//         alert('Invalid file type. Please upload an image (JPG, PNG, GIF, or WEBP).');
+//         profilePictureInput.value = ''; // Clear invalid input
+//         return;
+//     }
+
+//     saveButton.disabled = true; // Prevent multiple clicks
+//     saveButton.textContent = 'Saving...';
+
+//     const formData = new FormData();
+//     formData.append('profile_picture', file);
+
+//     try {
+//         const response = await fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
+//             method: 'PATCH',
+//             headers: {
+//                 'Authorization': `JWT ${accessToken}`
+//             },
+//             body: formData,
+//         });
+
+//         if (!response.ok) {
+//             const errorData = await response.json();
+//             throw new Error(errorData.detail || 'Failed to update profile picture.');
+//         }
+
+//         // Update the profile image only after a successful response
+//         profileImage.src = URL.createObjectURL(file);
+//         imagePreviewModal.style.display = 'none'; // Hide the modal
+//         profilePictureInput.value = ''; // Clear input after successful upload
+
+//     } catch (error) {
+//         console.error('Error:', error);
+//         alert(error.message || 'An error occurred while updating the profile picture.');
+//     } finally {
+//         saveButton.disabled = false; // Re-enable button
+//         saveButton.textContent = 'Save'; // Reset button text
+//     }
+// });
+
+// // Close the modal without saving when "Cancel" is clicked
+// cancelButton.addEventListener('click', () => {
+//     imagePreviewModal.style.display = 'none';
+//     profilePictureInput.value = ''; // Clear the file input
+// });
+
+
+
+
+profilePictureInput.addEventListener('change', () => {
+    const profileImageFile = profilePictureInput.files[0];
+
+    if (profileImageFile) {
+        imagePreview.src = URL.createObjectURL(profileImageFile); // Preview
         imagePreviewModal.style.display = 'flex';
     }
 });
 
-// Save the picture when "Save" is clicked
 saveButton.addEventListener('click', async (event) => {
     event.preventDefault();
 
@@ -139,27 +209,32 @@ saveButton.addEventListener('click', async (event) => {
         return;
     }
 
-    // Validate file type (only images allowed)
     const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (!validImageTypes.includes(file.type)) {
         alert('Invalid file type. Please upload an image (JPG, PNG, GIF, or WEBP).');
-        profilePictureInput.value = ''; // Clear invalid input
+        profilePictureInput.value = '';
         return;
     }
 
-    saveButton.disabled = true; // Prevent multiple clicks
+    saveButton.disabled = true;
     saveButton.textContent = 'Saving...';
 
-    const formData = new FormData();
-    formData.append('profile_picture', file);
-
     try {
+        // === Upload to Cloudinary ===
+        const uploadedUrl = await uploadToCloudinary(file);
+
+        // === Send PATCH request with Cloudinary URL ===
+        const payload = {
+            profile_picture: uploadedUrl
+        };
+
         const response = await fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
             method: 'PATCH',
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `JWT ${accessToken}`
             },
-            body: formData,
+            body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
@@ -167,23 +242,39 @@ saveButton.addEventListener('click', async (event) => {
             throw new Error(errorData.detail || 'Failed to update profile picture.');
         }
 
-        // Update the profile image only after a successful response
-        profileImage.src = URL.createObjectURL(file);
-        imagePreviewModal.style.display = 'none'; // Hide the modal
-        profilePictureInput.value = ''; // Clear input after successful upload
+        profileImage.src = uploadedUrl; // Update the image shown
+        imagePreviewModal.style.display = 'none';
+        profilePictureInput.value = '';
 
     } catch (error) {
         console.error('Error:', error);
         alert(error.message || 'An error occurred while updating the profile picture.');
     } finally {
-        saveButton.disabled = false; // Re-enable button
-        saveButton.textContent = 'Save'; // Reset button text
+        saveButton.disabled = false;
+        saveButton.textContent = 'Save';
     }
 });
 
-// Close the modal without saving when "Cancel" is clicked
-cancelButton.addEventListener('click', () => {
-    imagePreviewModal.style.display = 'none';
-    profilePictureInput.value = ''; // Clear the file input
-});
+// Cloudinary Upload Function (reused)
+async function uploadToCloudinary(file) {
+    const cloudName = "dnytooumu";
+    const uploadPreset = "TutorLinc_profile_images_preset";
 
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+    formData.append("folder", "profile_images");
+
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
+        method: "POST",
+        body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!data.secure_url) {
+        throw new Error("Cloudinary upload failed");
+    }
+
+    return data.secure_url;
+}

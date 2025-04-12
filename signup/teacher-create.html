@@ -102,34 +102,36 @@
         </form>
 
             <!-- *********************Verification********************* -->
-        <form class="signup-form" id="verification-info-form" style="display: none; text-align: center;">
-
-            <div style="background-color: rgb(243, 243, 243); padding: 10px; box-shadow: 0px 0px 20px 0px rgb(243, 243, 243); border-radius: 10px;">
-                <p style="display: inline-block; color: black;"><big>ID Card, Certificate</big> <br> Upload these documents to verify your identity</p> <br>
-            </div>
-
-            <div class="verification-skip-container">
-                <p id="verification-skip">Skip</p>
-            </div>
-
-            <div class="form-group">
-                <label for="id-card">Your ID card ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
-                <span id="id-card-error" style="color: red;"></span>
-                <input type="file" id="id-card" required>
-            </div>
-
-            <div class="form-group">
-                <label for="certificate">Your certificate ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
-                <span id="certificate-error" style="color: red;"></span>
-                <input type="file" id="certificate" required>
-            </div>
-
-            <button type="submit" class="btn" id="verification-submit-btn">
-                <span class="btn-text">Next</span>
-                <span class="verification-spinner" style="display: none;"></span>
-            </button>
-
-        </form>
+            <form class="signup-form" id="verification-info-form" style="display: none; text-align: center;">
+                <div style="background-color: rgb(243, 243, 243); padding: 10px; box-shadow: 0px 0px 20px 0px rgb(243, 243, 243); border-radius: 10px;">
+                    <p style="display: inline-block; color: black;"><big>ID Card, Certificate</big> <br> Upload these documents to verify your identity</p> <br>
+                </div>
+            
+                <div class="verification-skip-container">
+                    <p id="verification-skip">Skip</p>
+                </div>
+            
+                <div class="form-group">
+                    <label for="id-card">Your ID card ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
+                    <span id="id-card-error" style="color: red;"></span>
+                    <input type="file" id="id-card" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="certificate">Your certificate ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
+                    <span id="certificate-error" style="color: red;"></span>
+                    <input type="file" id="certificate" required>
+                </div>
+            
+                <!-- Hidden fields to store the URLs returned by Cloudinary -->
+                <input type="hidden" id="idCardUrl" name="id_card">
+                <input type="hidden" id="certificateUrl" name="certificate">
+            
+                <button type="submit" class="btn" id="verification-submit-btn">
+                    <span class="btn-text">Next</span>
+                    <span class="verification-spinner" style="display: none;"></span>
+                </button>
+            </form>            
 
 
         <div class="skip-documents-verification-modal" style="display: none;">

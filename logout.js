@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 logoutYESbtn.onclick=function(){
     localStorage.removeItem('accessToken');
-    window.location.href="signin.html";
+    window.location.href="login.html";
  }
  logoutNObtn.onclick=function(){
     window.location.href="overview.html";

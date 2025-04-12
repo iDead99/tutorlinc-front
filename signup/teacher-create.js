@@ -26,7 +26,7 @@ const verificationSkip = document.getElementById('verification-skip');
 const modalUploadBtn = document.querySelector('.modal-btn-upload');
 const modalSkipBtn = document.querySelector('.modal-btn-skip');
 
-const documentVerificationDoneModal = document.getElementById("document-verification-done");
+const documentVerificationDoneModal = document.querySelector(".document-verification-done-modal");
 const documentVerificationDoneBtn = document.querySelector(".document-verification-done-btn");
 
 const step1 = document.getElementById('step-1');
@@ -70,9 +70,8 @@ teacherInfoForm.addEventListener('submit', (e) => {
     createTeacher(teacherData);
 })
 
-
 function createTeacher(teacherData){    
-
+    
     fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/teachers/me/', {
     method: 'PUT',
     headers: {
@@ -163,68 +162,124 @@ function createTeacher(teacherData){
 }
 
 
-verificationInfoForm.addEventListener('submit', (e) => {
+const maxFileSizeMB = 5;
+const maxFileSize = maxFileSizeMB * 1024 * 1024;
+const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'image/jpg'];
+
+verificationInfoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    // Reset error messages
     idCardError.textContent = '';
     certificateError.textContent = '';
- 
+
+    const idCardFile = idCard.files[0];
+    const certificateFile = certificate.files[0];
+
     verificationSpinner.style.display = 'inline-block';
     verificationSubmitBtn.disabled = true;
 
-    const formData = new FormData();
-    formData.append('id_card', idCard.files[0]);
-    formData.append('certificate', certificate.files[0]);
+    if (!idCardFile || !allowedTypes.includes(idCardFile.type)) {
+        idCardError.textContent = `File extension ${idCardFile.type}s is not allowed. Allowed extensions are: "jpeg", "png", "pdf", "jpg"`;
+        resetUI();
+        return;
+    }
+    
+    if (idCardFile.size > maxFileSize) {
+        idCardError.textContent = `File size should not exceed ${maxFileSizeMB}MB.`;
+        resetUI();
+        return;
+    }
+    
+    // === Validate Certificate ===
+    if (!certificateFile || !allowedTypes.includes(certificateFile.type)) {
+        certificateError.textContent = `File extension ${certificateFile.type}s is not allowed. Allowed extensions are: "jpeg", "png", "pdf", "jpg"`;
+        resetUI();
+        return;
+    }
+    
+    if (certificateFile.size > maxFileSize) {
+        certificateError.textContent = `File size should not exceed ${maxFileSizeMB}MB.`;
+        resetUI();
+        return;
+    }    
 
-    createVerification(formData);
- });
- 
- function createVerification(verificationFormData) {
- 
-    fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/verifications/', {
-       method: 'POST',
-       headers: {
-          'Authorization': `JWT ${accessToken}`,
-       },
-       body: verificationFormData,
-    })
-    .then(response => {
-        if(!response.ok){
-            return response.json().then(error =>{
-                if (error.id_card) {
-                    idCardError.textContent = error.id_card;
-                    window.location.href = '#id-card-error';
-                }
-                if (error.certificate) {
-                    certificateError.textContent = error.certificate;
-                    window.location.href = '#certificate-error';
-                }
+    try {
+        // Upload to Cloudinary
+        const idCardUrl = await uploadToCloudinary(idCardFile);
+        const certificateUrl = await uploadToCloudinary(certificateFile);
+
+        const payload = {
+            id_card: idCardUrl,
+            certificate: certificateUrl,
+        };
+
+        const response = await fetch('https://tutorlinc-ws.onrender.com/manage_tutorlinc/verifications/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${accessToken}`,
+            },
+            body: JSON.stringify(payload),
         });
-       }
-       else{
-            teacherInfoForm.style.display = 'none';
-            addressInfoForm.style.display = 'none';
-            verificationInfoForm.style.display = 'none';
-            documentVerificationDoneModal.style.display = 'flex';
-            documentVerificationDoneBtn.addEventListener('click', () => {
-                window.location.href = 'overview.html';
-            })
-       }
-        return response.json();
-    })
-    .catch(error =>{
-        if (error.message === 'Failed to fetch') {
-           alert("Network error! Please check your internet connection.");
-       }
-       else {
-           return error;
-       }
-   })
-   .finally(() => {
-       verificationSpinner.style.display='none';
-       verificationSubmitBtn.disabled=false;
-   });
- }
+
+        if (!response.ok) {
+            const error = await response.json();
+            if (error.id_card) {
+                idCardError.textContent = error.id_card;
+                window.location.hash = '#id-card-error';
+            }
+            if (error.certificate) {
+                certificateError.textContent = error.certificate;
+                window.location.hash = '#certificate-error';
+            }
+            return;
+        }
+
+        verificationInfoForm.style.display = 'none';
+        documentVerificationDoneModal.style.display = 'flex';
+        documentVerificationDoneBtn.addEventListener('click', () => {
+            window.location.href = '../overview.html';
+        });
+
+    } catch (error) {
+        alert("Upload failed. Please check your connection and try again.");
+        console.error(error);
+    } finally {
+        resetUI();
+    }
+});
+
+// Cloudinary Upload Function
+async function uploadToCloudinary(file) {
+    const cloudName = "dnytooumu";  // your Cloudinary cloud name
+    const uploadPreset = "TutorLinc_verification_documents_preset";
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+    formData.append("folder", "verification_documents");
+
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
+        method: "POST",
+        body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!data.secure_url) {
+        throw new Error("Cloudinary upload failed");
+    }
+
+    return data.secure_url;
+}
+
+// Reset spinner & button
+function resetUI() {
+    verificationSpinner.style.display = 'none';
+    verificationSubmitBtn.disabled = false;
+}
+
 
 verificationSkip.addEventListener('click', () => {
     skipDocumentsVerificationModal.style.display = 'flex';
