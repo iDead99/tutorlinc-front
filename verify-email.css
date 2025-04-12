@@ -6,28 +6,27 @@ body {
     height: 100vh;
     background-color: #f4f4f4;
 }
-.container {
+
+.verify-container{
     background: white;
-    padding: 20px;
+    padding: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
-    width: 300px;
 }
-h2 {
-    margin-bottom: 10px;
+.verify-container h2{
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+    font-size: 30px;
 }
-p {
-    font-size: 14px;
-    color: #555;
-}
-
-.verify-email-message-container{
+.done-continer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
     animation: fadeIn 1s ease-out forwards;
-}
-.verify-email-message-container #verify-email-message{
-    color: rgb(2, 204, 2);
-    font-size: 20px;
 }
 @keyframes fadeIn {
     from {
@@ -37,35 +36,19 @@ p {
         opacity: 1;
     }
 }
-
-input {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 16px;
+.done-continer span{
+    background-color: rgba(5, 228, 5, 0.253);
+    padding: 20px;
+    font-size: 17px;
 }
-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
+.done-continer button{
+    background-color: #007BFF;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    padding: 10px;
+    color: white;
     cursor: pointer;
 }
-.submit-btn {
-    background: #28a745;
-    color: white;
-}
-.resend-btn, .verified-login-btn {
-    background: #007bff;
-    color: white;
-}
-.submit-btn:hover {
-    background: #218838;
-}
-.resend-btn:hover, .verified-login-btn:hover {
-    background: #0056b3;
+.done-continer button:hover{
+    opacity: 50%;
 }

@@ -71,7 +71,6 @@ function getTeacher(){
 
         verifyEmailButton.addEventListener('click', function() {
             if (data.user.id) {
-                console.log(data.user.id);
                 window.location.href = `verify-email.html?id=${data.user.id}`;
             }
         })

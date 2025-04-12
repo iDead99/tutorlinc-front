@@ -27,7 +27,7 @@ menuToggle.addEventListener('click', () => {
 const accessToken = localStorage.getItem('accessToken');
 
 if (!accessToken) {
-    window.location.href = "signin.html";
+    window.location.href = "login.html";
 }
 
 subject.addEventListener('input', () => {

@@ -21,7 +21,7 @@ body, html{
 #verification-skip{
     color: blue;
     cursor: pointer;
-    text-decoration: underline;
+    font-size: 18px;
 }
 .signup-header{
     background-color: #007BFF;
@@ -38,13 +38,25 @@ body, html{
 .signup-header-steps{
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
-.signup-header-steps span{
+.signup-step{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
     color: black;
     background-color: white;
-    border-radius: 20px;
-    padding: 2px 5px;
-    opacity: 80%;
+    border-radius: 100%;
+    opacity: 50%;
+}
+.current-step{
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    opacity: 100%;
 }
 
 .form-container{
@@ -102,57 +114,35 @@ body, html{
 
 .btn {
     width: 100%;
-    padding: 10px;
-    background-color: #28A745;
-    color: white;
+    padding: 12px;
     font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .btn:hover {
     opacity: 80%;
 }
-
-.spinner {
-    display: none;
-    margin-top: 20px;
-    text-align: center;
+.user-spinner, .teacher-spinner, .address-spinner, .verification-spinner {
+    width: 10px;
+    height: 10px;
+    border: 3px solid #fff;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
 }
 
-.spinner div {
-    width: 18px;
-    height: 18px;
-    background-color: #e74c3c;
-    border-radius: 100%;
-    display: inline-block;
-    -webkit-animation: bouncedelay 1.4s infinite ease-in-out both;
-    animation: bouncedelay 1.4s infinite ease-in-out both;
-}
-
-.spinner .bounce1 {
-    -webkit-animation-delay: -0.32s;
-    animation-delay: -0.32s;
-}
-
-.spinner .bounce2 {
-    -webkit-animation-delay: -0.16s;
-    animation-delay: -0.16s;
-}
-
-@-webkit-keyframes bouncedelay {
-    0%, 80%, 100% { -webkit-transform: scale(0); }
-    40% { -webkit-transform: scale(1.0); }
-}
-
-@keyframes bouncedelay {
-    0%, 80%, 100% {
-        transform: scale(0);
-        -webkit-transform: scale(0);
-    } 40% {
-        transform: scale(1.0);
-        -webkit-transform: scale(1.0);
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
     }
 }
 
@@ -178,34 +168,6 @@ body, html{
     text-align: center;
 }
 
-#skip-container {
-    color: black;
-    text-align: center;
-    background-color: white;
-    box-shadow: 0px 0px 20px rgb(185, 185, 185);
-    width: 280px;
-    justify-content: center;
-    padding: 10px;
-    animation: display-skip 1s;
-}
-#skip-container button{
-    background-color: white;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bolder;
-    text-align: center;
-    width: 70px;
-    height: 25px;
-    border-radius: 5px;
-    margin: 20px;
-    border: 0;
-}
-
-@keyframes display-skip{
-    from{
-        opacity: 10%;
-    }
-}
-
 #registration-succeed-container{
     color: black;
     text-align: center;
@@ -225,4 +187,80 @@ body, html{
     height: 25px;
     border-radius: 5px;
     border: 0;
+}
+
+
+.skip-documents-verification-modal, .document-verification-done-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11;
+}
+
+.modal-content {
+    width: fit-content;
+    background: #fff;
+    padding: 10px;
+    margin: 0 10px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: modal-appear 0.5s;
+}
+
+.modal-warning-sign{
+    display: flex;
+    justify-content: center;
+}
+.modal-warning-sign p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#e74c3c;
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-btn-upload {
+    background: #2980b9;
+    color: white;
+}
+
+.modal-btn-skip {
+    background: #ccc;
+    color: black;
+}
+
+.modal-btn-upload:hover {
+    background: #216795;
+}
+
+.modal-btn-skip:hover {
+    background: #aaa;
+}
+
+@keyframes modal-appear {
+    from{
+        transform: scale(0);
+    }
 }

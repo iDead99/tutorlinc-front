@@ -5,48 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Signup-TutorLinc</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="create.css">
 </head>
 <body>
     <div class="signup-header">
         <h2>TUTOR ACCOUNT SETUP</h2>
         <div class="signup-header-steps">
-            <span id="signup-personal-info">Personal info</span>
-            <span id="signup-address">Address</span>
-            <span id="signup-verify">Verification</span>
+            <span class="signup-step" id="step-1">1</span>
+            <span class="signup-step" id="step-2">2</span>
+            <span class="signup-step" id="step-3">3</span>
+            <span class="signup-step" id="step-4">Go</span>
         </div>
     </div>
 
     <div class="form-container">
-        <!-- *********************Personal info********************* -->
-        <form class="signup-form" id="personal-info-form" style="display: block;">
-            <div class="form-group">
-                <label for="first-name">First name</label>
-                <input type="text" id="first-name" name="first-name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="last-name">Last name</label>
-                <input type="text" id="last-name" name="last-name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <span id="email-error" style="color: red;"></span>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <span id="password-error" style="color: red;"></span>
-                <input type="password" id="password" name="password" required>
-            </div>
-            
-            <!-- <div class="form-group">
-                <label for="confirm-password">Confirm password</label>
-                <input type="password" id="confirm-password" name="confirm-password" required>
-            </div> -->
-                        
+        <form class="signup-form" id="teacher-info-form" style="display: block;">
             <div class="form-group">
                 <label for="phone">Phone number</label>
                 <input type="tel" id="phone" name="phone" minlength="10" maxlength="10" required >
@@ -74,24 +47,17 @@
                 <label for="bio">Bio</label>
                 <textarea name="bio" id="bio"></textarea>
             </div>
-
-            <button type="submit" class="btn" id="personal-info-btn">Next</button>
             
-            <div class="spinner" id="personal-info-spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-            </div>
+            <button type="submit" class="btn" id="teacher-submit-btn">
+                <span class="btn-text">Next</span>
+                <span class="teacher-spinner" style="display: none;"></span>
+            </button>
 
-            <p>Already have an account? <a href="signin.html">Login</a></p>
-
-            <div id="home-container">
-                <a id="home-link" href="index.html">Home</a>
-            </div>
         </form>
+
         
             <!-- *********************Address********************* -->
-        <form class="signup-form" id="address-form"  style="display: none;">
+        <form class="signup-form" id="address-info-form"  style="display: none;">
             <div class="form-group">
                 <label style="text-align: center; color: black;">Address</label>
             </div>
@@ -128,59 +94,71 @@
                 <input type="text" id="street" name="street" required >
             </div>
 
-            <button type="submit" class="btn" id="address-btn">Next</button>
+            <button type="submit" class="btn" id="address-submit-btn">
+                <span class="btn-text">Next</span>
+                <span class="address-spinner" style="display: none;"></span>
+            </button>
             
-            <div class="spinner" id="address-spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-            </div>
         </form>
 
             <!-- *********************Verification********************* -->
-        <form class="signup-form" id="verification-form" style="display: none; text-align: center;">
+        <form class="signup-form" id="verification-info-form" style="display: none; text-align: center;">
 
             <div style="background-color: rgb(243, 243, 243); padding: 10px; box-shadow: 0px 0px 20px 0px rgb(243, 243, 243); border-radius: 10px;">
                 <p style="display: inline-block; color: black;"><big>ID Card, Certificate</big> <br> Upload these documents to verify your identity</p> <br>
             </div>
 
-            <div class="verification-skip-container"><p id="verification-skip">Skip</p></div>
+            <div class="verification-skip-container">
+                <p id="verification-skip">Skip</p>
+            </div>
 
             <div class="form-group">
                 <label for="id-card">Your ID card ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
                 <span id="id-card-error" style="color: red;"></span>
-                <input type="file" id="id-card" name="id-card" required>
+                <input type="file" id="id-card" required>
             </div>
 
             <div class="form-group">
                 <label for="certificate">Your certificate ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
                 <span id="certificate-error" style="color: red;"></span>
-                <input type="file" id="certificate" name="certificate" required>
+                <input type="file" id="certificate" required>
             </div>
 
-            <button type="submit" class="btn" id="verification-btn">Done</button>
-            
-            <div class="spinner" id="verification-spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-            </div>
+            <button type="submit" class="btn" id="verification-submit-btn">
+                <span class="btn-text">Next</span>
+                <span class="verification-spinner" style="display: none;"></span>
+            </button>
+
         </form>
 
-        <div id="skip-container" style="display: none;">
-            <p id="skip-text" style="display: inline-block;">You will not be visible to any students until you upload your documents for verification</p> <br>
-            <button style="color: white; background-color: red;" id="skip-ok-btn">OK</button>
-            <button style="color: white; background-color: green;" id="skip-cancel-btn">UPLOAD</button>
+
+        <div class="skip-documents-verification-modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-warning-sign">
+                    <p>!</p>
+                </div>
+                <h2>Exiting documents verification?</h2>
+                <p>You will not be visible to any students until you upload your documents for verification.</p> <br>
+                <div class="modal-actions">
+                    <button class="modal-btn-upload">Upload</button>
+                    <button class="modal-btn-skip">Skip</button>
+                </div>
+            </div>
         </div>
 
-        <div id="registration-succeed-container" style="display: none;">
-            <p><mark style="color: rgb(1, 167, 1); background-color: white;"><big>Documents uploaded successfully!</big></mark> <br>
-               We'll review them ASAP, and once approved, you'll be visible to all students. Thank you!! <br>
-               You may login to your dashboard👇
-            </p>
-            <button style="color: white; background-color: #e74c3c; border: none;" id="registration-succeed-ok-btn">OK</button>
+
+        <div class="document-verification-done-modal" style="display: none;">
+            <div class="modal-content">
+                <h2 style="color: rgb(1, 167, 1); background-color: white;">Documents uploaded successfully!</h2>
+                <p>
+                    We'll review them ASAP, and once approved, you'll be visible to all students. Thank you!! <br>
+                    <p style="font-weight: bold;">You may login to your dashboard👇</p>
+                </p>
+                <button style="width: 20%; padding: 5px; border-radius: 5px; border: none; cursor: pointer; color: white; background-color: #e74c3c; border: none;" class="document-verification-done-btn">OK</button>
+            </div>
         </div>
+
     </div>
-<script src="signup.js"></script>
+<script src="teacher-create.js"></script>
 </body>
 </html>

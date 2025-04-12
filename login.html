@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Login-TutorLinc</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="signin.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <div class="form-container">
-        <form class="login-form" action="/login" method="POST">
-            <h2>Login to Your Account</h2>
+        <form class="login-form">
+            <h2 id="login-title"></h2>
+            <p id="login-sub-title"></p>
 
             <div class="form-group">
                 <label for="email">Email Address</label>
@@ -23,22 +24,21 @@
                 <input type="password" id="password" name="password" required>
             </div>
 
-            <button type="submit" class="btn">Login</button>
+                <button type="submit" class="login-btn" id="login-btn">
+                    <span class="btn-text">Log In</span>
+                    <span class="spinner" style="display: none;"></span>
+                </button>
 
-            <div class="spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
+            <div id="account-question-container">
+                <p>Don't have an account? <a href="signup.html">Register here</a></p>
+                <p><a href="#forgot-password">Forgot your password?</a></p>
             </div>
-
-            <p>Don't have an account? <a href="signup.html">Register here</a></p>
-            <p><a href="#forgot-password">Forgot your password?</a></p>
 
             <div id="home-container">
                 <a id="home-link" href="index.html">Home</a>
             </div>
         </form>
     </div>
-<script src="signin.js"></script>
+<script src="login.js"></script>
 </body>
 </html>
