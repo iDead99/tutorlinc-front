@@ -5,7 +5,7 @@ const logoutContainer = document.getElementById("logout-container");
 const accessToken = localStorage.getItem('accessToken');
 document.addEventListener('DOMContentLoaded', () => {
     if(!accessToken){
-        window.location.href="signin.html";
+        window.location.href="login.html";
     }
 })
 
