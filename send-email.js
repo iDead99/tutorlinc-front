@@ -9,18 +9,16 @@ const accessToken=localStorage.getItem('accessToken');
 //     window.location.href="overview.html";
 // }
 
-document.addEventListener('DOMContentLoaded', () => {
+resendBtn.addEventListener('click', () => {
+
+    verifyEmailMessage.style.display = 'none';
 
     const params = new URLSearchParams(window.location.search);
     const userId = params.get('id');
 
-    verifyEmailMessage.style.display = 'none';
     spinner.style.display = 'inline-block';
     resendBtn.disabled = true;
-    if(resendBtn.disabled === true){
-        resendBtn.style.opacity = '50%';
-    }
-    
+
     sendVerificationEmail(userId);
 
 })
@@ -39,7 +37,6 @@ function sendVerificationEmail(userId) {
     .then(data => {
         verifyEmailMessage.textContent = data.message;
         verifyEmailMessage.style.display = 'block';
-        spinner.style.display = 'none';
     })
     .catch(error => {
         if (error.message === 'Failed to fetch') {
@@ -48,4 +45,8 @@ function sendVerificationEmail(userId) {
             alert(error.message);
         }
     })
+    .finally(() => {
+        spinner.style.display = 'none';
+        resendBtn.disabled = false;
+    });
 }
