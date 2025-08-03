@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Login-TutorLinc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="form-container">
+        <form class="login-form">
+            <h2 id="login-title"></h2>
+            <p id="login-sub-title"></p>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <span id="user-pass-error" style="color: red;"></span>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+                <button type="submit" class="login-btn" id="login-btn">
+                    <span class="btn-text">Log In</span>
+                    <span class="spinner" style="display: none;"></span>
+                </button>
+
+            <div id="account-question-container">
+                <p>Don't have an account? <a href="signup/user-create.html">Register here</a></p>
+                <p><a href="password-reset/request-password-reset.html">Forgot your password?</a></p>
+            </div>
+
+            <div id="home-container">
+                <a id="home-link" href="index.html">Home</a>
+            </div>
+        </form>
+    </div>
+<script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Profile Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="add-subject.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TutorLinc logo">
+                <h1 class="site-name">TutorLinc</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="subject.html" class="active">Subject</a></li>
+                <li><a href="inquiry.html">Student inquiry</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <div class="menu-toggle-container">
+                <button class="menu-toggle">☰</button> <!-- Hamburger Menu -->
+                <hr>
+            </div>
+
+            <header class="main-header">
+                <h1>Create New Subject</h1>
+            </header>
+
+            <div id="operation-done" style=" display: none; background-color: rgb(192, 253, 192); color: green; box-shadow: 0px 0px 20px 0px rgb(200, 255, 200); padding: 2px 20px;">
+                <p>Operation done successfully!</p>
+            </div>
+
+            <div class="back-link">
+                <a href="subject.html">Back</a>
+            </div>
+
+            <section class="add-subject">
+                <form id="add-subject-form">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+
+                    <label for="amount">Amount(GHS)/day of teaching</label>
+                    <input type="text" id="amount" name="amount" required>
+
+                    <label for="teaching-day">Day(s) to teach</label>
+                    <input type="text" id="teaching-day" name="teaching-day" required>
+
+                    <label for="start-time">Start time</label>
+                    <input type="time" id="start-time" name="start-time" required>
+
+                    <label for="end-time">End time</label>
+                    <input type="time" id="end-time" name="end-time" required>
+
+                    <button type="submit" class="btn-add-subject">Add Subject</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="add-subject.js"></script>
+</body>
+</html>

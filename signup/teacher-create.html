@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Signup-TutorLinc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="create.css">
+</head>
+<body>
+    <div class="signup-header">
+        <h2>TUTOR ACCOUNT SETUP</h2>
+        <div class="signup-header-steps">
+            <span class="signup-step" id="step-1">1</span>
+            <span class="signup-step" id="step-2">2</span>
+            <span class="signup-step" id="step-3">3</span>
+            <span class="signup-step" id="step-4">Go</span>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form class="signup-form" id="teacher-info-form" style="display: block;">
+            <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" minlength="10" maxlength="10" required >
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender">
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="qualification">Highest qualification</label>
+                <select name="qualification" id="qualification">
+                    <option value="Diploma">Diploma</option>
+                    <option value="Bachelor's Degree">Bachelor's Degree</option>
+                    <option value="Master's Degree">Master's Degree</option>
+                    <option value="Doctoral Degree (PhD)">Doctoral Degree (PhD)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="bio">Bio (Optional)</label>
+                <textarea name="bio" id="bio"></textarea>
+            </div>
+            
+            <button type="submit" class="btn" id="teacher-submit-btn">
+                <span class="btn-next">Next</span>
+                <span class="teacher-spinner" style="display: none;"></span>
+            </button>
+
+        </form>
+
+        
+            <!-- *********************Address********************* -->
+        <form class="signup-form" id="address-info-form"  style="display: none;">
+            <div class="form-group">
+                <label style="text-align: center; color: black;">Address</label>
+            </div>
+
+            <div class="form-group">
+                <label for="region">Region</label>
+                <select id="region" name="region">
+                    <option value="Greater Accra">Greater Accra</option>
+                    <option value="Ashanti">Ashanti</option>
+                    <option value="Western">Western</option>
+                    <option value="Central">Central</option>
+                    <option value="Eastern">Eastern</option>
+                    <option value="Volta">Volta</option>
+                    <option value="Oti">Oti</option>
+                    <option value="Northern">Northern</option>
+                    <option value="Savannah">Savannah</option>
+                    <option value="Upper East">Upper East</option>
+                    <option value="Upper West">Upper West</option>
+                    <option value="Bono">Bono</option>
+                    <option value="Bono East">Bono East</option>
+                    <option value="Ahafo">Ahafo</option>
+                    <option value="Western North">Western North</option>
+                    <option value="North East">North East</option>
+                  </select>                  
+            </div>
+
+            <div class="form-group">
+                <label for="town">Town/City</label>
+                <input type="text" id="town" name="town" required >
+            </div>
+
+            <div class="form-group">
+                <label for="street">Street</label>
+                <input type="text" id="street" name="street" required >
+            </div>
+
+            <button type="submit" class="btn" id="address-submit-btn">
+                <span class="btn-next">Next</span>
+                <span class="address-spinner" style="display: none;"></span>
+            </button>
+            
+        </form>
+
+            <!-- *********************Verification********************* -->
+            <form class="signup-form" id="verification-info-form" style="display: none; text-align: center;">
+                <div style="background-color: rgb(243, 243, 243); padding: 10px; box-shadow: 0px 0px 20px 0px rgb(243, 243, 243); border-radius: 10px;">
+                    <p style="display: inline-block; color: black;"><big>ID Card, Certificate</big> <br> Upload these documents to verify your identity</p> <br>
+                </div>
+            
+                <div class="verification-skip-container">
+                    <p id="verification-skip">Skip</p>
+                </div>
+            
+                <div class="form-group">
+                    <label for="id-card">Your ID card ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
+                    <span id="id-card-error" style="color: red;"></span>
+                    <input type="file" id="id-card" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="certificate">Your certificate ( 'jpg', 'jpeg', 'png', 'pdf' )</label>
+                    <span id="certificate-error" style="color: red;"></span>
+                    <input type="file" id="certificate" required>
+                </div>
+            
+                <!-- Hidden fields to store the URLs returned by Cloudinary -->
+                <input type="hidden" id="idCardUrl" name="id_card">
+                <input type="hidden" id="certificateUrl" name="certificate">
+            
+                <button type="submit" class="btn" id="verification-submit-btn">
+                    <span class="btn-next">Next</span>
+                    <span class="verification-spinner" style="display: none;"></span>
+                </button>
+            </form>            
+
+
+        <div class="skip-documents-verification-modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-warning-sign">
+                    <p>!</p>
+                </div>
+                <h2>Exiting documents verification?</h2>
+                <p>You will not be visible to any students until you upload your documents for verification.</p> <br>
+                <div class="modal-actions">
+                    <button class="modal-btn-upload">Upload</button>
+                    <button class="modal-btn-skip">Skip</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="document-verification-done-modal" style="display: none;">
+            <div class="modal-content">
+                <h2 style="color: rgb(1, 167, 1); background-color: white;">Documents uploaded successfully!</h2>
+                <p>
+                    We'll review them ASAP, and once approved, you'll be visible to all students. Thank you!! <br>
+                    <p style="font-weight: bold;">You may login to your dashboard👇</p>
+                </p>
+                <button style="width: 20%; padding: 5px; border-radius: 5px; border: none; cursor: pointer; color: white; background-color: #e74c3c; border: none;" class="document-verification-done-btn">OK</button>
+            </div>
+        </div>
+
+    </div>
+<script src="teacher-create.js"></script>
+</body>
+</html>

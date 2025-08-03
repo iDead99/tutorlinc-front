@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Signup-TutorLinc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="create.css">
+</head>
+<body>
+    <div class="signup-header">
+        <h2>TUTOR ACCOUNT SETUP</h2>
+        <div class="signup-header-steps">
+            <span class="signup-step" id="step-1">1</span>
+            <span class="signup-step" id="step-2">2</span>
+            <span class="signup-step" id="step-3">3</span>
+            <span class="signup-step" id="step-4">Go</span>
+        </div>
+    </div>
+
+    <div class="form-container">
+
+        <form class="signup-form" id="user-info-form" style="display: block;">
+            <div class="form-group">
+                <label for="first-name">First name</label>
+                <input type="text" id="first-name" name="first-name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last-name">Last name</label>
+                <input type="text" id="last-name" name="last-name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <span id="email-error" style="color: red;"></span>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <span id="password-error" style="color: red;"></span>
+                <input type="password" id="password" name="password" required>
+            </div>
+                        
+            <!-- <div class="form-group">
+                <label for="confirm-password">Confirm password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div> -->
+            
+            <button type="submit" class="btn" id="user-submit-btn">
+                <span class="btn-next">Next</span>
+                <span class="user-spinner" style="display: none;"></span>
+            </button>
+
+            <p>Already have an account? <a href="../login.html">Login</a></p>
+
+            <div id="home-container">
+                <a id="home-link" href="../index.html">Home</a>
+            </div>
+        </form>
+        
+    </div>
+<script src="user-create.js"></script>
+</body>
+</html>

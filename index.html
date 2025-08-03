@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>TutorLinc</title>
+
+    <link rel="icon" type="image/png" href="images/favicon 16X16.png">
+    <link rel="icon" type="image/png" href="images/favicon 32X32.png">
+    <link rel="icon" type="image/png" href="images/favicon 64X64.png">
+    <link rel="icon" type="image/png" href="images/favicon 128X128.png">
+    <link rel="icon" type="image/png" href="images/favicon 180X180.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TutorLinc logo">
+                <h1 class="site-name">TutorLinc</h1>
+            </div>
+            <button class="menu-toggle">☰</button> <!-- Hamburger Menu -->
+            <nav class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#">Home 🏠</a></li>
+                    <li><a href="#how-it-works">How It Works ❓</a></li>
+                    <li><a href="#location-search-input">Find a Teacher 🔎</a></li>
+                    <li><a href="signup/user-create.html">Become a Tutor 📚</a></li>
+                    <li><a href="#footer">Contact Us 📞</a></li>
+                    <li><a href="login.html" class="login-btn">Sign Up / Log In</a></li>                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="banner-container">
+        <div class="banner" id="banner-1" style="display: none;">
+            <div class="text-container">
+                <h2>TUTORLINC SAYS!</h2>
+                <div class="marquee">
+                    <span>It Started From a Brick Before It Became a Mansion</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner" id="banner-2"></div>
+    </div>
+    <div class="banner-nav-container">
+        <span id="banner-nav-1" style="opacity: 40%;"></span>
+        <span id="banner-nav-2"></span>
+    </div>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+            <h2>Find the Perfect Private Tutor Near You</h2>
+            <p>Connect with qualified tutors in your area for personalized learning</p>
+            <form class="search-bar" id="search-bar">
+                <input id="location-search-input" type="text" placeholder="Enter your location">
+                <input id="subject-search-input" type="text" placeholder="What do you want to learn?" disabled>
+            </form>
+
+            <!-- New container for locations -->
+             <div class="location-result-overall-container">
+                <span class="location-title" style="display: none;">LOCATIONS</span>
+                <ul class="location-result-container"></ul>
+            </div>
+            <div class="subject-result-overall-container">
+                <span class="subject-title" style="display: none;">SUBJECTS</span>
+                <ul class="subject-result-container"></ul>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#secondary-btn" class="primary-btn"><label for="location-search-input">Find a Teacher</label></a>
+                <a href="signup/user-create.html" class="secondary-btn" >Become a Tutor</a>
+            </div>
+        </div>
+    </section>
+    
+    
+    <h3>Our Tutors</h3>
+    <section class="teacher-list-section"></section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h3>Why Choose Us?</h3>
+            <div class="features-grid">
+                <div class="feature">
+                    <!-- <i class="icon">📚</i> -->
+                    <i class="icon"><img src="images/icons/stack-of-books.png" alt="Book photo" style="width: 60px; height: 60px;"></i>
+                    <h4>Personalized Learning</h4>
+                    <p>Find a tutor who tailors lessons to your needs.</p>
+                </div>
+                <div class="feature">
+                    <!-- <i class="icon">✅</i> -->
+                    <i class="icon"><img src="images/icons/check.png" alt="Verify photo" style="width: 60px; height: 60px;"></i>
+                    <h4>Verified Tutors</h4>
+                    <p>Tutors are professionally vetted for authenticity and expertise.</p>
+                </div>
+                <div class="feature">
+                    <!-- <i class="icon">📅</i> -->
+                     <i class="icon"><img src="images/icons/schedule.png" alt="Schedule photo" style="width: 60px; height: 60px;"></i>
+                    <h4>Flexible Scheduling</h4>
+                    <p>Book lessons that fit your timetable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h3>How It Works</h3>
+            <div class="steps-grid">
+                <div class="step">
+                    <i class="icon"><img src="images/icons/search.png" alt="Search photo" style="width: 60px; height: 60px;"></i>
+                    <h4>Search</h4>
+                    <p>Enter your subject and location to find nearby tutors.</p>
+                </div>
+                <div class="step">
+                    <i class="icon"><img src="images/icons/link.png" alt="Connect photo" style="width: 60px; height: 60px;"></i>
+                    <h4>Connect</h4>
+                    <p>Browse tutor profiles and choose the right one for you.</p>
+                </div>
+                <div class="step">
+                    <i class="icon"><img src="images/icons/mortarboard.png" alt="Study photo" style="width: 60px; height: 60px;"></i>
+                    <h4>Learn</h4>
+                    <p>Schedule a session and start learning immediately!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Subjects Section -->
+    <section class="popular-subjects" id="popular-subjects">
+        <div class="container">
+            <h3>Popular Subjects</h3>
+            <div class="subjects-grid">
+                <p class="subject-card">Mathematics</p>
+                <p class="subject-card">Science</p>
+                <p class="subject-card">English</p>
+                <p class="subject-card">Computer Programming</p>
+                <p class="subject-card">More…</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comments Section -->
+    <section class="comments">
+        <div class="container">
+            <h3>What Students Are Saying</h3>
+            <div class="comment-form-container">
+                <form class="comment-form">
+                    <textarea name="comment-input" id="comment-input" required placeholder="Write your comment"></textarea>
+                    <!-- <input type="text" id="commenter" placeholder="Enter name (Optional)"> -->
+                    <br>
+                    <button type="submit" class="comment-btn" style="padding: 5px">Add comment</button>
+                </form>
+            </div>
+            <div class="comment-container"></div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <h3>Ready to start learning?</h3>
+            <a href="#location-search-input" class="primary-btn">Find Your Tutor Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Email Us</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+            <p>&copy; 2025 Find My Tutor. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

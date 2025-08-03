@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Profile Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="edit-profile.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TutorLinc logo">
+                <h1 class="site-name">TutorLinc</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="subject.html">Subject</a></li>
+                <li><a href="inquiry.html">Student inquiry</a></li>
+                <li><a href="profile.html" class="active">Profile</a></li>
+                <li><a href="logout.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <div class="menu-toggle-container">
+                <button class="menu-toggle">☰</button> <!-- Hamburger Menu -->
+                <hr>
+            </div>
+
+            <header class="main-header">
+                <h1>Edit Profile</h1>
+            </header>
+
+            <div id="operation-done" style=" display: none; background-color: rgb(192, 253, 192); color: green; box-shadow: 0px 0px 20px 0px rgb(200, 255, 200); padding: 2px 20px;">
+                <p>Operation done successfully!</p>
+            </div>
+
+            <div class="back-link">
+                <a href="profile.html">Back</a>
+            </div>
+
+            <section class="edit-profile">
+                <form id="edit-profile-form">
+                    <label for="first-name">First name</label>
+                    <input type="text" id="first-name" name="first-name" required>
+
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last-name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" readonly title="can't change email here">
+
+                    <label for="phone">Phone number</label>
+                    <input type="tel" id="phone" name="phone" required>
+
+                    <label for="qualification">Highest qualification</label>
+                    <select name="qualification" id="qualification">
+                        <option value="Diploma">Diploma</option>
+                        <option value="Bachelor's Degree">Bachelor's Degree</option>
+                        <option value="Master's Degree">Master's Degree</option>
+                        <option value="Doctoral Degree (PhD)">Doctoral Degree (PhD)</option>
+                    </select>
+
+                    <label for="bio">Bio</label>
+                    <textarea name="bio" id="bio"></textarea>
+
+                    <button type="submit" class="btn-edit-profile">Update Profile</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="edit-profile.js"></script>
+</body>
+</html>

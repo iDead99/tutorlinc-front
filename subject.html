@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Subject Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="subject.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TutorLinc logo">
+                <h1 class="site-name">TutorLinc</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="" class="active">Subject</a></li>
+                <li><a href="inquiry.html">Student inquiry</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="logout.html" class="logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <div class="menu-toggle-container">
+                <button class="menu-toggle">☰</button> <!-- Hamburger Menu -->
+                <hr>
+            </div>
+
+            <header class="main-header">
+                <h1>Manage Subjects</h1>
+            </header>
+
+            <section class="subjects-section">
+                <table class="subjects-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Amount(GHS)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+
+    <div class="delete-subject-modal" style="display: none;">
+        <div class="delete-subject-modal-content">
+            <h3>Are you sure you want to delete this subject?</h3>
+                <div class="delete-subject-modal-actions">
+                    <button id="delete-subject-delete-btn">Delete</button>
+                    <button id="delete-subject-cancel-btn">Cancel</button>
+                </div>
+        </div>
+    </div>
+
+            </section>
+            <a href="add-subject.html" style="text-decoration: none;"><button class="add-subject-btn">Add New Subject</button></a>
+        </main>
+    </div>
+
+    <script src="subject.js"></script>
+</body>
+</html>
