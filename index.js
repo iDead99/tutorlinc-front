@@ -35,7 +35,7 @@ menuToggle.addEventListener('click', () => {
 
 setTimeout(() => {
     marqueeText.classList.add("animate-marquee");
-}, 4000);
+}, 3000);
 
 function showBanner(bannerToShow, bannerToHide, navToHighlight, navToDim) {
     bannerToShow.style.display = 'block';

@@ -22,10 +22,18 @@ body, html {
 
 h3 {
     text-align: center;
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-    opacity: 50%;
-    padding: 2%;
+    text-align: center;
+    letter-spacing: 2px;
+}
+h6 {
+    text-align: center;
+    /* background-color: #f9f9f9; */
+    opacity: 40%;
+    text-align: center;
+    letter-spacing: 10px;
+}
+P{
+    opacity: 60%;
 }
 
 /* Header Section */
@@ -221,6 +229,7 @@ h3 {
     font-size: 18px;
     padding: 2px;
     text-align: center;
+    opacity: 60%;
 }
 
 
