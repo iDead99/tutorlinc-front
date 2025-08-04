@@ -273,25 +273,29 @@ h3 {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #0000005e;
+    background-color: #00000044;
     height: 100%;
 }
 #banner-1 h2{
-    color: #007BFF;
+    color: white;
     font-size: 3rem;
-    text-shadow: 2px 2px 0 white;
+    text-shadow: 2px 2px 0 black;
+    background-color: #00000044;
 }
 .marquee{
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
-    background-color: black;
-    opacity: 60%;
+    background-color: #007BFF;
+    /* opacity: 60%; */
 }
 .marquee span{
-    color: #2ae656;
+    color: white;
     font-size: 1.5rem;
     display: inline-block;
+}
+
+.animate-marquee {
     padding-left: 100%;
     animation: marquee 15s linear infinite;
 }

@@ -21,6 +21,8 @@ const banner2 = document.getElementById('banner-2');
 const bannerNav1 = document.getElementById('banner-nav-1');
 const bannerNav2 = document.getElementById('banner-nav-2');
 
+const marqueeText = document.getElementById('marquee-text');
+
 menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('show');
     // Change button content based on toggle
@@ -30,6 +32,11 @@ menuToggle.addEventListener('click', () => {
         menuToggle.textContent = '☰'; // Change back to 'hamburger' icon
     }
 });
+
+setTimeout(() => {
+    marqueeText.classList.add("animate-marquee");
+}, 4000);
+
 function showBanner(bannerToShow, bannerToHide, navToHighlight, navToDim) {
     bannerToShow.style.display = 'block';
     bannerToHide.style.display = 'none';
