@@ -264,9 +264,9 @@ h3 {
 #banner-1 {
     background-image: url(images/banner-1.jpg);
 }
-#banner-2 {
+/* #banner-2 {
     background-image: url(images/banner-2.jpg);
-}
+} */
 .text-container {
     display: flex;
     flex-direction: column;
