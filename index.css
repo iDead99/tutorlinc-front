@@ -334,13 +334,15 @@ P{
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
-    background-color: #007BFF;
+    background-color: #00000044;
+    /* background-color: #28A745; */
     /* opacity: 60%; */
 }
 .marquee span{
     color: white;
     font-size: 1.5rem;
     display: inline-block;
+    font-weight: bold;
 }
 
 .animate-marquee {
