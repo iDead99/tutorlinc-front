@@ -188,7 +188,7 @@ P{
     overflow-y: auto;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     scrollbar-width: none;
-    background-color: rgb(245, 249, 255);
+    /* background-color: rgb(245, 249, 255); */
 }
 .teacher-container{
     display: flex;
@@ -197,7 +197,7 @@ P{
     flex-direction: column;
     padding: 10px;
     width: 20%;
-    background: #fff;
+    /* background: #fff; */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -470,7 +470,7 @@ P{
     padding: 30px;
     flex: 1 1 250px;
     background: white;
-    border-radius: 15px;
+    /* border-radius: 15px; */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }

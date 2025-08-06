@@ -11,6 +11,69 @@ const totalInquiry = document.getElementById('total-inquiries');
 const addNewSubjectModal = document.getElementById('add-new-subject-modal');
 const quitAddSubjectBtn = document.querySelector('.quit-add-subject-btn');
 
+
+const publicVapidKey = 'BF5-lsS79GGBTVETO7P9iQTa9X51iOjzurHQoW9TUbiCumAiDACW-brv8qpTqpra7Il75JA0nztP1M_wJ1JniSU';
+
+async function registerServiceWorker(userId) {
+  if ('serviceWorker' in navigator && 'PushManager' in window) {
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") {
+        console.warn("Push permission not granted");
+        return;
+      }
+
+      const registration = await navigator.serviceWorker.register('service-worker.js');
+      console.log("✅ Service Worker registered", registration);
+
+      // Check for existing subscription
+      const existingSubscription = await registration.pushManager.getSubscription();
+      if (existingSubscription) {
+        console.log("🔁 Existing subscription found, unsubscribing...");
+        await existingSubscription.unsubscribe();
+      }
+
+      // Now subscribe with new key
+      const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+      });
+
+      console.log("✅ New subscription created:", subscription);
+
+      await fetch('http://127.0.0.1:8000/manage_tutorlinc/subscriptions/', {
+        method: 'POST',
+        body: JSON.stringify({
+          user: userId,
+          endpoint: subscription.endpoint,
+          auth: subscription.toJSON().keys.auth,
+          p256dh: subscription.toJSON().keys.p256dh
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+    } catch (error) {
+      console.error("Push subscription failed", error);
+    }
+  }
+}
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i)
+    outputArray[i] = rawData.charCodeAt(i);
+  return outputArray;
+}
+
 menuToggle.addEventListener('click', () => {
     if(menuToggle.textContent === '☰'){
         menuToggle.textContent = '✖'
@@ -52,6 +115,7 @@ function getTeacher(){
 
         getSubject(data.id);
         getInquiry(data.id)
+        registerServiceWorker(data.id);
 
     })
     .catch(error => {

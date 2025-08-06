@@ -139,6 +139,10 @@ function displayTeacher(teacherData){
         }
         else{
             teacherImage.src = teachers.profile_picture;
+            teacherImage.onerror = function () {
+                this.onerror = null; // Prevent infinite loop if fallback also fails
+                this.src = "./images/logo.png";
+            }
         }
 
         const teacherName = document.createElement('span');

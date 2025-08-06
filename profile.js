@@ -100,9 +100,26 @@ function getTeacher(){
         if(data.profile_picture === null){
             profileImage.src = "./images/logo.png";
         }
-        else{
-            profileImage.src = data.profile_picture;
+        // cloudinary
+        // else{
+        //     profileImage.src = data.profile_picture;
+            // Fallback in case the image file is missing
+            // profileImage.onerror = function () {
+            //     this.onerror = null; // Prevent infinite loop if fallback also fails
+            //     this.src = "./images/logo.png";
+            // };
+        // }
+        // local
+        else {
+            profileImage.src = `http://127.0.0.1:8000/${data.profile_picture}`;
+
+            // Fallback in case the image file is missing
+            profileImage.onerror = function () {
+                this.onerror = null; // Prevent infinite loop if fallback also fails
+                this.src = "./images/logo.png";
+            };
         }
+
         
         if(data.bio === ''){
             bio.textContent = 'No bio';
@@ -164,6 +181,7 @@ profilePictureInput.addEventListener('change', () => {
     }
 });
 
+// local saving and fetching
 saveButton.addEventListener('click', async (event) => {
     event.preventDefault();
 
@@ -181,68 +199,169 @@ saveButton.addEventListener('click', async (event) => {
         return;
     }
 
+    // Disable button to prevent duplicate clicks
     saveButton.disabled = true;
     saveButton.textContent = 'Saving...';
 
     try {
-        // === Upload to Cloudinary ===
-        const uploadedUrl = await uploadToCloudinary(file);
-
-        // === Send PATCH request with Cloudinary URL ===
-        const payload = {
-            profile_picture: uploadedUrl
-        };
+        const formData = new FormData();
+        formData.append('profile_picture', file);
 
         const response = await fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `JWT ${accessToken}`
             },
-            body: JSON.stringify(payload)
+            body: formData
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.detail || 'Failed to update profile picture.');
+            let errorMessage = 'An unexpected error occurred.';
+
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.detail || JSON.stringify(errorData);
+            } catch {
+                const errorText = await response.text();
+                console.error('Server error response (non-JSON):', errorText);
+            }
+
+            throw new Error(errorMessage);
         }
 
-        profileImage.src = uploadedUrl; // Update the image shown
+        const updatedData = await response.json();
+
+        // Update image preview
+        if (updatedData.profile_picture) {
+            profileImage.src = `http://127.0.0.1:8000${updatedData.profile_picture}`;
+        }
+
+        // Reset form/modal
         imagePreviewModal.style.display = 'none';
         profilePictureInput.value = '';
 
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Upload Error:', error);
         alert(error.message || 'An error occurred while updating the profile picture.');
     } finally {
+        // Always re-enable button and reset text
         saveButton.disabled = false;
         saveButton.textContent = 'Save';
     }
 });
 
-// Cloudinary Upload Function (reused)
-async function uploadToCloudinary(file) {
-    const cloudName = "dnytooumu";
-    const uploadPreset = "TutorLinc_profile_images_preset";
-
+// local upload function
+async function updateTeacherProfile(data, file = null) {
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", uploadPreset);
-    formData.append("folder", "profile_images");
 
-    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
-        method: "POST",
+    // Append data fields
+    for (const key in data) {
+        formData.append(key, data[key]);
+    }
+
+    // Append image file if provided
+    if (file) {
+        formData.append("profile_picture", file);
+    }
+
+    const response = await fetch("http://127.0.0.1:8000/manage_tutorlinc/teachers/me/", {
+        method: "PATCH",
+        headers: {
+            Authorization: `JWT ${accessToken}`,
+        },
         body: formData,
     });
 
-    const data = await response.json();
-
-    if (!data.secure_url) {
-        throw new Error("Cloudinary upload failed");
+    if (!response.ok) {
+        const error = await response.json();
+        console.error(error);
+        throw new Error("Failed to update profile");
     }
 
-    return data.secure_url;
+    return await response.json();
 }
+
+// Cloudinary Upload Function (reused)
+// async function uploadToCloudinary(file) {
+//     const cloudName = "dnytooumu";
+//     const uploadPreset = "TutorLinc_profile_images_preset";
+
+//     const formData = new FormData();
+//     formData.append("file", file);
+//     formData.append("upload_preset", uploadPreset);
+//     formData.append("folder", "profile_images");
+
+//     const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
+//         method: "POST",
+//         body: formData,
+//     });
+
+//     const data = await response.json();
+
+//     if (!data.secure_url) {
+//         throw new Error("Cloudinary upload failed");
+//     }
+
+//     return data.secure_url;
+// }
+
+
+// cloudinary saving and fetching
+// saveButton.addEventListener('click', async (event) => {
+//     event.preventDefault();
+
+//     const file = profilePictureInput.files[0];
+
+//     if (!file) {
+//         alert('Please select an image before saving.');
+//         return;
+//     }
+
+//     const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+//     if (!validImageTypes.includes(file.type)) {
+//         alert('Invalid file type. Please upload an image (JPG, PNG, GIF, or WEBP).');
+//         profilePictureInput.value = '';
+//         return;
+//     }
+
+//     saveButton.disabled = true;
+//     saveButton.textContent = 'Saving...';
+
+//     try {
+//         // === Upload to Cloudinary ===
+//         const uploadedUrl = await uploadToCloudinary(file);
+
+//         // === Send PATCH request with Cloudinary URL ===
+//         const payload = {
+//             profile_picture: uploadedUrl
+//         };
+
+//         const response = await fetch('http://127.0.0.1:8000/manage_tutorlinc/teachers/me/', {
+//             method: 'PATCH',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `JWT ${accessToken}`
+//             },
+//             body: JSON.stringify(payload)
+//         });
+
+//         if (!response.ok) {
+//             const errorData = await response.json();
+//             throw new Error(errorData.detail || 'Failed to update profile picture.');
+//         }
+
+//         profileImage.src = uploadedUrl; // Update the image shown
+//         imagePreviewModal.style.display = 'none';
+//         profilePictureInput.value = '';
+
+//     } catch (error) {
+//         console.error('Error:', error);
+//         alert(error.message || 'An error occurred while updating the profile picture.');
+//     } finally {
+//         saveButton.disabled = false;
+//         saveButton.textContent = 'Save';
+//     }
+// });
 
 
 cancelButton.addEventListener('click', async (event) => {
