@@ -67,6 +67,10 @@ function getTeacher(teacher_id){
         }
         else{
             teacherImage.src = data.profile_picture;
+            teacherImage.onerror = function () {
+                this.onerror = null; // Prevent infinite loop if fallback also fails
+                this.src = "./images/logo.png";
+            };
         }
 
         teacherImageContainer.appendChild(teacherImage);
