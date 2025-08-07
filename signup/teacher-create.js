@@ -166,6 +166,86 @@ const maxFileSizeMB = 5;
 const maxFileSize = maxFileSizeMB * 1024 * 1024;
 const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'image/jpg'];
 
+// ======local upload======
+// verificationInfoForm.addEventListener('submit', async (e) => {
+//     e.preventDefault();
+
+//     // Reset error messages
+//     idCardError.textContent = '';
+//     certificateError.textContent = '';
+
+//     const idCardFile = idCard.files[0];
+//     const certificateFile = certificate.files[0];
+
+//     verificationSpinner.style.display = 'inline-block';
+//     verificationSubmitBtn.disabled = true;
+
+//     if (!idCardFile || !allowedTypes.includes(idCardFile.type)) {
+//         idCardError.textContent = `File type ${idCardFile.type} is not allowed. Allowed: jpeg, png, pdf, jpg.`;
+//         resetUI();
+//         return;
+//     }
+
+//     if (idCardFile.size > maxFileSize) {
+//         idCardError.textContent = `File size must not exceed ${maxFileSizeMB}MB.`;
+//         resetUI();
+//         return;
+//     }
+
+//     if (!certificateFile || !allowedTypes.includes(certificateFile.type)) {
+//         certificateError.textContent = `File type ${certificateFile.type} is not allowed. Allowed: jpeg, png, pdf, jpg.`;
+//         resetUI();
+//         return;
+//     }
+
+//     if (certificateFile.size > maxFileSize) {
+//         certificateError.textContent = `File size must not exceed ${maxFileSizeMB}MB.`;
+//         resetUI();
+//         return;
+//     }
+
+//     // Prepare FormData
+//     const formData = new FormData();
+//     formData.append('id_card', idCardFile);
+//     formData.append('certificate', certificateFile);
+
+//     try {
+//         const response = await fetch('http://127.0.0.1:8000/manage_tutorlinc/verifications/', {
+//             method: 'POST',
+//             headers: {
+//                 'Authorization': `JWT ${accessToken}`, // Don't set Content-Type manually
+//             },
+//             body: formData,
+//         });
+
+//         if (!response.ok) {
+//             const error = await response.json();
+//             if (error.id_card) {
+//                 idCardError.textContent = error.id_card;
+//                 window.location.hash = '#id-card-error';
+//             }
+//             if (error.certificate) {
+//                 certificateError.textContent = error.certificate;
+//                 window.location.hash = '#certificate-error';
+//             }
+//             return;
+//         }
+
+//         verificationInfoForm.style.display = 'none';
+//         documentVerificationDoneModal.style.display = 'flex';
+//         documentVerificationDoneBtn.addEventListener('click', () => {
+//             window.location.href = '../overview.html';
+//         });
+
+//     } catch (error) {
+//         alert("Upload failed. Please check your connection and try again.");
+//         console.error(error);
+//     } finally {
+//         resetUI();
+//     }
+// });
+
+
 verificationInfoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 

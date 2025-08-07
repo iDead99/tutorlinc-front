@@ -56,6 +56,15 @@ document.getElementById('add-subject-form').addEventListener('submit', function(
 });
 
 function addSubject() {
+    const start = startTime.value;
+    const end = endTime.value;
+
+    if (start >= end) {
+        alert("Start time must be earlier than end time.");
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '100%';
+        return; // Stop execution
+    }
 
     fetch(`http://127.0.0.1:8000/manage_tutorlinc/subjects/`, {
         method: 'POST',
@@ -67,8 +76,8 @@ function addSubject() {
             name: subject.value,
             price: amount.value,
             day_to_teach: teachingDay.value,
-            start_time: startTime.value,
-            end_time: endTime.value
+            start_time: start,
+            end_time: end
         })
     })
     .then(response => {
@@ -76,22 +85,19 @@ function addSubject() {
             throw new Error('Network was not ok!');
         } else {
             operationDone.style.display = 'block';
-            window.location.href='#operation-done'
+            window.location.href = '#operation-done';
             submitBtn.disabled = false;
-            if (submitBtn.disabled === false) {
-                submitBtn.style.opacity = '100%';
-            }
+            submitBtn.style.opacity = '100%';
             clearInput();
         }
         return response.json();
     })
     .then(data => {
+        // Optionally handle the response data
     })
     .catch(error => {
         submitBtn.disabled = false;
-        if (submitBtn.disabled === false) {
-            submitBtn.style.opacity = '100%';
-        }
+        submitBtn.style.opacity = '100%';
         alert(error);
     });
 }

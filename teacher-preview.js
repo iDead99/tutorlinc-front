@@ -5,7 +5,10 @@ const email = document.getElementById('email');
 const phone = document.getElementById('phone');
 const message = document.getElementById('message');
 
-const operationDone = document.getElementById('operation-done');
+const formModal = document.getElementById('form-modal');
+const operationDoneModal = document.getElementById('operation-done-modal');
+
+const operationDoneBtn = document.getElementById('operation-done-btn');
 
 const inquiryBtn = document.querySelector('.inquiry-btn');
 const teacherStatusMessage = document.querySelector('.teacher-status-msg');
@@ -13,18 +16,18 @@ const submitBtn = document.querySelector('.btn-submit');
 
 
 
-fullName.addEventListener('input', () => {
-    operationDone.style.display = 'none';
-})
-email.addEventListener('input', () => {
-    operationDone.style.display = 'none';
-})
-phone.addEventListener('input', () => {
-    operationDone.style.display = 'none';
-})
-message.addEventListener('input', () => {
-    operationDone.style.display = 'none';
-})
+// fullName.addEventListener('input', () => {
+//     operationDone.style.display = 'none';
+// })
+// email.addEventListener('input', () => {
+//     operationDone.style.display = 'none';
+// })
+// phone.addEventListener('input', () => {
+//     operationDone.style.display = 'none';
+// })
+// message.addEventListener('input', () => {
+//     operationDone.style.display = 'none';
+// })
 
 document.addEventListener('DOMContentLoaded', function() { 
     const params = new URLSearchParams(window.location.search);
@@ -96,12 +99,12 @@ function getTeacher(teacher_id){
 
         inquiryBtn.addEventListener('click', function() {
             if(data.availability_status === 'Active'){
-                document.querySelector('.modal').style.display = 'flex';
+                formModal.style.display = 'flex';
             }
             else{
                 const response = confirm('This teacher is currently inactive. Would you like to proceed with your inquiry?')
                 if (response === true){
-                    document.querySelector('.modal').style.display = 'flex';
+                    formModal.style.display = 'flex';
                 }
                 else{
                     return;
@@ -224,8 +227,8 @@ function sendInquiry(inquiryData){
             throw new Error(response.error)
         }
         else{
-            operationDone.style.display = 'block';
-            window.location.href='#operation-done'
+            formModal.style.display = 'none';
+            operationDoneModal.style.display = 'flex';
             submitBtn.disabled = false;
             if (submitBtn.disabled === false) {
                 submitBtn.style.opacity = '100%';
@@ -247,5 +250,8 @@ function sendInquiry(inquiryData){
 }
 
 document.querySelector('.btn-cancel').addEventListener('click', function(e) {
-    document.querySelector('.modal').style.display = 'none';
+    formModal.style.display = 'none';
+})
+operationDoneBtn.addEventListener('click', function(e) {
+    operationDoneModal.style.display = 'none';
 })

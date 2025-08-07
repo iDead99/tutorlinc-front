@@ -29,11 +29,12 @@ async function registerServiceWorker(userId) {
       // Check for existing subscription
       const existingSubscription = await registration.pushManager.getSubscription();
       if (existingSubscription) {
-        console.log("🔁 Existing subscription found, unsubscribing...");
-        await existingSubscription.unsubscribe();
+        console.log("🔁 Reusing existing subscription");
+        await sendSubscriptionToBackend(existingSubscription, userId);
+        return;
       }
 
-      // Now subscribe with new key
+      // Subscribe with new key
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
@@ -41,38 +42,46 @@ async function registerServiceWorker(userId) {
 
       console.log("✅ New subscription created:", subscription);
 
-      await fetch('http://127.0.0.1:8000/manage_tutorlinc/subscriptions/', {
-        method: 'POST',
-        body: JSON.stringify({
-          user: userId,
-          endpoint: subscription.endpoint,
-          auth: subscription.toJSON().keys.auth,
-          p256dh: subscription.toJSON().keys.p256dh
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      await sendSubscriptionToBackend(subscription, userId);
 
     } catch (error) {
-      console.error("Push subscription failed", error);
+      console.error("❌ Push subscription failed", error);
     }
   }
+}
+
+async function sendSubscriptionToBackend(subscription, userId) {
+  console.log("📩 Sending subscription to backend...");
+
+  await fetch('http://127.0.0.1:8000/manage_tutorlinc/subscriptions/', {
+    method: 'POST',
+    body: JSON.stringify({
+      user: userId,
+      endpoint: subscription.endpoint,
+      auth: subscription.toJSON().keys.auth,
+      p256dh: subscription.toJSON().keys.p256dh
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
 }
 
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
   const base64 = (base64String + padding)
-    .replace(/\-/g, '+')
+    .replace(/-/g, '+')
     .replace(/_/g, '/');
 
   const rawData = atob(base64);
   const outputArray = new Uint8Array(rawData.length);
 
-  for (let i = 0; i < rawData.length; ++i)
+  for (let i = 0; i < rawData.length; ++i) {
     outputArray[i] = rawData.charCodeAt(i);
+  }
   return outputArray;
 }
+
 
 menuToggle.addEventListener('click', () => {
     if(menuToggle.textContent === '☰'){
